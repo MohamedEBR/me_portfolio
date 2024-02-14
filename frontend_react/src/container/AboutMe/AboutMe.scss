@@ -1,0 +1,85 @@
+
+
+
+.app__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 7%;
+    margin-top: 2rem;
+
+    svg {
+        height: 400px;
+        width: 400px;
+    }
+
+    @media screen and (max-width: 1200px) {
+        align-items:center;
+        justify-content: center;
+    }
+
+    
+   div {
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 2rem;
+
+    
+    @media screen and (max-width: 1200px) {
+        align-items:center;
+        justify-content: center;
+        width: 100%;
+    }
+    }
+  
+
+    div:nth-child(4){
+        margin-top: 40px;
+    }
+    
+
+
+    .p-text {
+        margin-top: 20px;
+        font-size: 1rem;
+        @media screen and (max-width: 1200px) {
+            text-align: center;
+        }
+    }
+    h3 {
+        font-size: 2rem;
+    }
+
+    .floating-img{
+        
+        animation-name: floating-img;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        margin-left: 30px;
+    }
+    @keyframes floating-img {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 15px); }
+        100%   { transform: translate(0, -0px); }    
+    }
+    img  {
+        width:300px;
+    }
+}
+
+.pill {
+    height:0px;
+    border-radius: 2px;
+    color: var(--secondary-color);
+    border: 2px solid currentColor;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+  
+
+
