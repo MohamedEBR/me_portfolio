@@ -6,7 +6,7 @@ import "./Resume.scss";
 import { motion } from "framer-motion";
 import { urlFor, client } from "../../client";
 
-const About = () => {
+const Resume = () => {
   return (
     <>
       <div className="app__profiles">
@@ -65,7 +65,7 @@ const About = () => {
 };
 
 export default AppWrap(
-  MotionWrap(About, "app__about"),
-  "about",
+  MotionWrap(Resume, "app__resume"),
+  "resume",
   "app__whitebg"
 );

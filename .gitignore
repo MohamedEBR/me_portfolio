@@ -39,3 +39,6 @@
 # Sanity studio files
 sanity.json
 studio/
+
+# Local Netlify folder
+.netlify
