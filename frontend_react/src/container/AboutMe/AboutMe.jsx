@@ -83,14 +83,7 @@ const AboutMe = () => {
           <hr className="pill" />
           <h3>Hobbies and Interest</h3>
           <p className="p-text">
-            When I'm not busy coding, you can find me running around on some
-            sort of sporting field, making sure that I'm stick to the saying "a
-            healthy body harbors a healthy mind." Sports, along with
-            weightlifting, help me keep my brain sharp and practice to perfect
-            my problem-solving techniques, like in my karate, where I've won a
-            number of provincial and national tournaments. Staying active to
-            make sure my growth-focused approach with each new coding project is
-            ready and raring to go from the get-go.
+          Beyond coding, I'm passionate about staying active and healthy, both physically and mentally. Whether I'm on the sporting field or lifting weights, I find that physical activity keeps my mind sharp and hones my problem-solving skills. This dedication to well-being extends to my karate practice, where I've competed and won at both provincial and national tournaments, including the Ontario Karate Federation Elite Tournaments (2020-2024) and the Canada Karate Nationals (2023, Laval, Montreal). Maintaining an active lifestyle ensures that I approach each new coding project with a growth mindset and relentless drive to succeed.
           </p>
         </div>
       </div>

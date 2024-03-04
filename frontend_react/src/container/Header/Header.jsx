@@ -5,6 +5,10 @@ import { AppWrap } from '../../wrapper'
 import {images} from '../../constants'
 import './Header.scss';
 
+import { Tooltip } from 'react-tooltip'
+
+
+
 const scaleVariants = {
   whileInView : {
     scale: [0,1],
@@ -15,6 +19,7 @@ const scaleVariants = {
     }
   }
 }
+
 const Header = () => (
   <div className="app__header app__flex">
     <motion.div
@@ -58,10 +63,15 @@ const Header = () => (
       whileInView={scaleVariants.whileInView}
       className="app__header-circles"
     >
-      {[images.node, images.react, images.sass].map((circle, index) => (
+      {
+     
+      [images.node, images.react, images.sass].map((circle, index) => (
+        <>
         <div className="circle-cmp app__flex" key={`circle-${index}`}>
           <img src={circle} alt="profile_bg" />
         </div>
+       
+        </>
       ))}
     </motion.div>
   </div>

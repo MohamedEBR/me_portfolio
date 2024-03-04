@@ -23,12 +23,7 @@ const Resume = () => {
         <div>
           <hr className="pill" />
           <p className="p-text">
-            <span>I excel in fast-paced settings</span>, driven by a commitment
-            to excellence and a detail-oriented mindset. My strong initiative,
-            ability to solve problems independently, and team collaboration
-            skills enable me to contribute significantly from the start.
-            Passionate about innovation and learning, I seek roles that offer
-            growth and creativity, requiring a forward-thinking approach.
+            <span>Thrive in dynamic environments</span>,  fueled by a relentless pursuit of excellence and meticulous attention to detail. My proactive approach, exceptional problem-solving skills, and collaborative spirit ensure I can deliver immediate and impactful results from day one. My demonstrated ability to learn new technologies quickly and apply them to build user-centric and efficient full-stack applications showcases my potential to drive innovation and continuously learn. Possessing a growth mindset, I'm eager to find an internship opportunity that allows me to push boundaries and employ a forward-thinking approach within a collaborative and supportive team environment.
           </p>
 
           <div className="app__footer-cards">
