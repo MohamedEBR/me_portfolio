@@ -9,8 +9,8 @@ import { saveAs } from "file-saver";
 const Resume = () => {
 
   const handleClick = () => {
-    let url = images.schedule;
-    saveAs(url, "panacea-schedule");
+    let url = "http://links.mailer.resume-now.com/u/click?_t=49d9a262835845f3a348b9e977aa9132&_m=e0c4d73ebb684257ac35ca7e333ea4a6&_e=qqWGBQ_ZOoo4p6RdF0QuHzzzcMmxxZortj-UfjEBcrNTnDzESNSBhFeot4-GzzC8BmTSjmlpyWA56AcWt0D1WQ6NQx6uqlEmtrlfQ-rn_e2BNFDit94CoZ2pfN6NO1finM79RKMh22wFRPhe_R-OwsmE9Hbx0iaTgq_KzqyohnIRgG999-AOEjr7WJGMSYH9TeoPciQRhEeNmLWYsHdJ1Ua52LsYfL_8nxj1sVPERyJIoAtq-Csabofwxt3pxxQoisXThmNUdOyRKe_QLwxZmvwT3NFpzfTmwgSIA8qJfISP5zc8O7kGpDIcdOybUDAIp2QKcgbZrS-6zo9h4jDb93vhQvRwHueQBP95WjR-ZrejYy13DAE5P3w469hLRrQWpA399slfmlDJ9bZ3BkX6F7GIUUGlmHyGi_h-CHR-v6STxVDFnxRiYvqecynOozC8x9RaBOzRWM04rygpE37XhsxhYgC67kTpp8tH_xgvpc-KEHnpz6umikzheWpNCpTOe3dymwPx9dAFfonUEUS-ctLUXRWW1DxbTMsakrHCtwwvVJAsZugF0fJw7g70OmKeb_v1i_pEuHtTwekhmYvc2tjOn58pdBdCTpi_ay7XIQ_nLoyW6gliwSFiDws8THaGY-aCM4LLLPl3v4vMIVL20BqvW8YtNMGCcaarLXSzSDTTqnTw-vSfehGnKmsP3K1OeQ-Flzq9q9gUGrpcfs7zhfCuZE__QQTcJdRjI3SoU-L0MzBLimt2vA7EQAtLPO2ERKAXa6t_88e2rRL-89h77Q%3D%3D";
+    saveAs(url, "Mohamed_Ebraheem-resume");
   };
 
   return (
@@ -41,7 +41,7 @@ const Resume = () => {
               >
                 <img src={images.businessman} alt="hire" />
               </a>
-              <a  className="p-text" href="#contact" onClick={handleClick}>
+              <a  className="p-text" href="#contact" >
                 Hire Me
               </a>
             </div>
@@ -54,7 +54,7 @@ const Resume = () => {
                 <img src={images.cv} alt="cv" />
               </a>
 
-              <a  className="p-text">
+              <a  className="p-text" onClick={handleClick}>
                 Resume
               </a>
             </div>
