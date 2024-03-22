@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { images } from "../../constants";
 import "./Resume.scss";
-import { motion } from "framer-motion";
-import { urlFor, client } from "../../client";
+import { saveAs } from "file-saver";
+
 
 const Resume = () => {
+
+  const handleClick = () => {
+    let url = images.schedule;
+    saveAs(url, "panacea-schedule");
+  };
+
   return (
     <>
       <div className="app__profiles">
@@ -35,7 +41,7 @@ const Resume = () => {
               >
                 <img src={images.businessman} alt="hire" />
               </a>
-              <a  className="p-text" href="#contact">
+              <a  className="p-text" href="#contact" onClick={handleClick}>
                 Hire Me
               </a>
             </div>
