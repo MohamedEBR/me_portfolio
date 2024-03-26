@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { HiChevronLeft, HiChevronRight  } from 'react-icons/hi';
+import { BsLinkedin } from "react-icons/bs";
+
 import { motion } from 'framer-motion';
 
 import { AppWrap, MotionWrap } from '../../wrapper';
@@ -33,12 +35,21 @@ const Testimonial = () => {
       {testimonials.length && (
         <>
           <div className="app__testimonial-item app__flex">
+            <div className='img__item'>
             <img src={urlFor(testimonials[currentIndex].imgurl)} alt={testimonials[currentIndex].name} />
+
+            <a href="https://www.linkedin.com/in/mohamed-ebraheem-294541240/">
+          <BsLinkedin />
+        </a>
+            </div>
             <div className="app__testimonial-content">
               <p className="p-text">{testimonials[currentIndex].feedback}</p>
+              
               <div>
-                <h4 className="bold-text">{testimonials[currentIndex].name}</h4>
+                <h4 className="bold-text"> {testimonials[currentIndex].name}</h4>
                 <h5 className="p-text">{testimonials[currentIndex].company}</h5>
+                
+                
               </div>
             </div>
           </div>

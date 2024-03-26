@@ -25,6 +25,11 @@ export default {
             name:'feedback',
             title:'Feedback',
             type:'string'
+        },
+        {
+            name:'link',
+            title:'link',
+            type:'string'
         }
     ]
 }

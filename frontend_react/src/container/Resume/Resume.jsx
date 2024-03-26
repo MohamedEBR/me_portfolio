@@ -60,7 +60,7 @@ const Resume = () => {
 
               <a
                 className="p-text"
-                href="https://drive.google.com/file/d/1UrG5axLzVpjLsyNOCL2lTsj-NB3hw-M2/view?usp=drive_link"
+                href="https://1drv.ms/b/s!AsiriP6npu_Okv9lAFVrHYPY8kig-Q?e=a2zalT"
               >
                 Resume
               </a>
