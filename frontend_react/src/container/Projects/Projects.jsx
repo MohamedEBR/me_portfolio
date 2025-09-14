@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiCode, HiExternalLink } from 'react-icons/hi'
 import { BsGithub } from 'react-icons/bs'
-import { FaReact, FaJava, FaPython, FaDocker } from 'react-icons/fa'
-import { SiSpringboot, SiDjango, SiStripe, SiPostgresql, SiMongodb, SiTailwindcss } from 'react-icons/si'
+import { FaReact, FaJava, FaPython, FaDocker, FaNodeJs } from 'react-icons/fa'
+import { SiSpringboot, SiDjango, SiStripe, SiPostgresql, SiMongodb, SiTailwindcss, SiTypescript, SiMui, SiExpress, SiOpenai } from 'react-icons/si'
 import OptimizedImage from '../../components/OptimizedImage'
 import panaceaImg from '../../assets/panacea.png'
 import discoverImg from '../../assets/discover.png'
+import chatbotImg from '../../assets/chatbot.png'
 
 const ProjectCard = ({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -14,15 +15,20 @@ const ProjectCard = ({ project, index }) => {
   const getTechIcon = (tech) => {
     const icons = {
       'React': FaReact,
+      'Node.js': FaNodeJs,
       'Java': FaJava,
       'Python': FaPython,
+      'TypeScript': SiTypescript,
       'Spring Boot': SiSpringboot,
       'Django': SiDjango,
+      'Express': SiExpress,
       'Docker': FaDocker,
       'PostgreSQL': SiPostgresql,
       'MongoDB': SiMongodb,
       'Tailwind CSS': SiTailwindcss,
       'Stripe': SiStripe,
+      'Material UI': SiMui,
+      'OpenAI': SiOpenai,
     }
     const Icon = icons[tech] || HiCode
     return <Icon className="w-4 h-4" />
@@ -210,6 +216,26 @@ const Projects = () => {
       ],
       technologies: ["Django", "Python", "React", "Machine Learning"],
       githubLink: "https://github.com/discovermyuni/discovermyuni.org"
+    },
+    {
+      id: 3,
+      title: "AI SaaS Chat Bot (MERN + OpenAI)",
+      category: "Full-Stack",
+      description: "A full-stack AI chatbot platform inspired by ChatGPT, built with the MERN stack and OpenAI’s GPT models. Secure auth, per-user chat history, and modern UI/UX.",
+      image: chatbotImg,
+      features: [
+        "Secure authentication with JWTs stored in signed, HTTP-only cookies",
+        "User registration, login/logout, and persistent sessions",
+        "Personal chat history saved per user with view/delete functionality",
+        "Integrated OpenAI chat completions for conversational AI",
+        "Request validation and error handling with express-validator",
+        "Modular backend with structured controllers and routes for scalability"
+      ],
+      technologies: [
+        "React", "TypeScript", "Node.js", "Express", "MongoDB", "Material UI", "OpenAI"
+      ],
+      liveLink: "https://github.com/MohamedEBR/AI-SaaS-Chat-Bot",
+      githubLink: "https://github.com/MohamedEBR/AI-SaaS-Chat-Bot"
     }
   ]
 
