@@ -13,6 +13,8 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   position: fixed;
   z-index: 2;
+  transform: translateZ(0); /* Fix flickering */
+  will-change: transform; /* Optimize for transforms */
 }
 
 .app__navbar-logo {
@@ -62,9 +64,11 @@
       font-weight: 500;
 
       transition: all 0.3s ease-in-out;
+      transform: translateZ(0); /* Fix flickering */
 
       &:hover {
         color: var(--secondary-color);
+        transform: translateY(-1px) translateZ(0); /* Subtle lift */
       }
     }
 

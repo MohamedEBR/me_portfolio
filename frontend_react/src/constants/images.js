@@ -29,8 +29,11 @@ import kick from "../assets/taekwondo.gif"
 import suit from "../assets/Mohamed-suit.JPG"
 import businessman from "../assets/businessman.png"
 import cv from "../assets/cv.png"
+import uoftMain from "../assets/Uoft.jpg"
+import utasrLogo from "../assets/utasr_logo.jpg"
+import utmmcssLogo from "../assets/utmmcss_logo.jpg"
 
-import profile from "../assets/profile-good.png";
+import profile from "../assets/Mohamed.jpeg";
 import circle from "../assets/circle.svg";
 import logo from "../assets/logo.png";
 
@@ -49,6 +52,9 @@ export default {
   kick,
   coding,
   running,
+  uoftMain,
+  utasrLogo,
+  utmmcssLogo,
   email,
   mobile,
   api,

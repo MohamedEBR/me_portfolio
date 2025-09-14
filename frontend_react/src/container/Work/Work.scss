@@ -22,10 +22,12 @@
         cursor: pointer;
         transition: all 0.3s ease;
         margin: 0.5rem;
+        transform: translateZ(0); /* Fix flickering */
 
         &:hover {
             background-color: var(--secondary-color);
-            color: #fff
+            color: #fff;
+            transform: translateY(-1px) translateZ(0); /* Subtle lift */
         }
 
         @media screen and (min-width: 2000px) {
@@ -58,9 +60,11 @@
 
         cursor: pointer;
         transition: all 0.3s ease;
+        transform: translateZ(0); /* Fix flickering */
         
         &:hover {
-            box-shadow: 0 0 25px rgba(0,0,0, 0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0, 0.15);
+            transform: translateY(-2px) translateZ(0);
         }
         @media screen and (min-width: 2000px) {
             width: 470px;
@@ -104,6 +108,7 @@
     border-radius: 0.5rem;
     opacity: 0;
     transition: all 0.3s ease;
+    will-change: opacity; /* Optimize for opacity changes */
 
     div {
         width: 50px;
@@ -118,6 +123,12 @@
         font-weight: 800;
         cursor: pointer;
         transition: all 0.3s ease;
+        transform: translateZ(0); /* Fix flickering */
+
+        &:hover {
+            background-color: rgba(0,0,0, 0.7);
+            transform: scale(1.02) translateZ(0);
+        }
 
         svg {
             height: 50%;

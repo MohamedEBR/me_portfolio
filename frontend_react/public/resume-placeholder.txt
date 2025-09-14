@@ -1,0 +1,16 @@
+# Resume PDF Placeholder
+
+This file should be replaced with your actual resume PDF.
+The current resume file should be named `resume.pdf` and placed in the public folder.
+
+Current resume information:
+- Name: Mohamed Ebraheem
+- Program: Computer Science & Information Security, University of Toronto Mississauga
+- Email: ebraheemohamed26@gmail.com
+- Phone: +1 (647) 767-6066
+
+To update the resume:
+1. Export your resume as a PDF
+2. Name it `resume.pdf`
+3. Place it in the `public` folder
+4. Update the download functionality in Footer.jsx if needed

@@ -29,9 +29,9 @@ const Footer = () => {
       return;
     }
 
-    const serviceId = process.env.REACT_APP_SERVICE_ID;
-    const templateId = process.env.REACT_APP_TEMPLATE_ID;
-    const publicKey = process.env.REACT_APP_PUBLIC_KEY;
+  const serviceId = process.env.REACT_APP_SERVICE_ID || 'your_service_id';
+  const templateId = process.env.REACT_APP_TEMPLATE_ID || 'your_template_id';
+  const publicKey = process.env.REACT_APP_PUBLIC_KEY || 'your_public_key';
 
     const templateParams = {
       from_name: name,
