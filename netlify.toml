@@ -1,0 +1,11 @@
+[build]
+  # Monorepo: run build inside the React app folder
+  base = "frontend_react"
+  publish = "build"
+  command = "npm install && npm run build"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# NOTE: We already use public/_redirects and public/_headers in CRA public/.
+# Netlify will copy them into the build and honor them on deploy.
