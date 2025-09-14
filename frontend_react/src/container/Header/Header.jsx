@@ -111,7 +111,7 @@ const Header = () => {
             variants={itemVariants} 
             className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed"
           >
-            Second-year Computer Science student at the University of Toronto Mississauga (Information Security + Mathematics). I build secure, scalable web applications and lead teams to ship real, student-impacting products.
+            Second-year Computer Science student at the University of Toronto(Information Security + Mathematics). I build secure, scalable web applications and lead teams to ship real, student-impacting products.
           </motion.p>
 
           {/* Call to Action Buttons */}
