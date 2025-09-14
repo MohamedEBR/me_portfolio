@@ -1,0 +1,5 @@
+# Force HTTPS
+http://* https://:splat 301!
+
+# Canonical domain: redirect www to apex
+https://www.mohamedebr.com/* https://mohamedebr.com/:splat 301!
