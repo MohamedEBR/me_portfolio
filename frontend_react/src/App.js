@@ -12,6 +12,7 @@ const Projects = lazy(() => import('./container/Projects/Projects'))
 const Skills = lazy(() => import('./container/Skills/Skills'))
 const Testimonials = lazy(() => import('./container/Testimonial/Testimonial'))
 const Contact = lazy(() => import('./container/Contact/Contact'))
+const Clubs = lazy(() => import('./container/Clubs/Clubs'))
 
 function App() {
   const [isDarkMode, toggleDarkMode] = useDarkMode()
@@ -32,6 +33,10 @@ function App() {
           
           <Suspense fallback={<LoadingSpinner />}>
             <Experience />
+          </Suspense>
+
+          <Suspense fallback={<LoadingSpinner />}>
+            <Clubs />
           </Suspense>
           
           <Suspense fallback={<LoadingSpinner />}>
