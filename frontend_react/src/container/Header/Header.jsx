@@ -7,6 +7,7 @@ import OptimizedImage from '../../components/OptimizedImage'
 import ParticleBackground from '../../components/ParticleBackground'
 import { useDarkMode } from '../../hooks'
 import { images } from '../../constants'
+import resumePdf from '../../assets/ME_Resume.pdf'
 
 const SocialLink = ({ href, icon: Icon, label, delay = 0 }) => (
   <motion.a
@@ -130,7 +131,7 @@ const Header = () => {
               whileHover={{ scale: 1.02, boxShadow: "0 8px 25px rgba(255,255,255,0.1)" }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              href="https://1drv.ms/b/s!AsiriP6npu_Okv9lAFVrHYPY8kig-Q?e=a2zalT"
+              href={resumePdf}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 hover:border-white/40 font-semibold rounded-full transition-all duration-300 ease-out group"

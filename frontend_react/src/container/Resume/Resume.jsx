@@ -3,6 +3,7 @@ import React from "react";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { images } from "../../constants";
 import "./Resume.scss";
+import resumePdf from "../../assets/ME_Resume.pdf";
 
 const Resume = () => {
 
@@ -60,7 +61,9 @@ const Resume = () => {
 
               <a
                 className="p-text"
-                href="https://1drv.ms/b/s!AsiriP6npu_Okv9lAFVrHYPY8kig-Q?e=a2zalT"
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Resume
               </a>
