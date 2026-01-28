@@ -3,15 +3,64 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { HiCode, HiExternalLink, HiLockClosed, HiTerminal } from 'react-icons/hi'
 import { BsGithub } from 'react-icons/bs'
 import { FaReact, FaJava, FaPython, FaDocker, FaNodeJs } from 'react-icons/fa'
-import { SiSpringboot, SiDjango, SiStripe, SiPostgresql, SiMongodb, SiTailwindcss, SiTypescript, SiMui, SiExpress, SiOpenai } from 'react-icons/si'
+import { SiSpringboot, SiDjango, SiStripe, SiPostgresql, SiMongodb, SiTailwindcss, SiTypescript, SiMui, SiExpress, SiOpenai, SiFastapi, SiPytorch, SiRedis, SiScikitlearn, SiGnubash, SiC, SiLinux } from 'react-icons/si'
 import OptimizedImage from '../../components/OptimizedImage'
 import panaceaImg from '../../assets/panacea.png'
 import discoverImg from '../../assets/discover.png'
 import chatbotImg from '../../assets/chatbot.png'
+import automlImg from '../../assets/automl.png'
+import picoFlagImg from '../../assets/picoctf_flag.png'
+import networkSecurityImg from '../../assets/network_security.png'
+import myShellImg from '../../assets/myshell.png'
 
 const projects = [
   {
+    id: 0,
+    title: "AutoML",
+    category: "Full-Stack",
+    description: "Autonomous Agentic System where specialized AI agents collaborate to build, train, and deploy ML models. Features a chat-first interface, Chain-of-Thought reasoning, and real-time training visualization.",
+    image: automlImg,
+    features: [
+      "Agentic Orchestration",
+      "Real-time Training Viz",
+      "Chain-of-Thought Reasoning"
+    ],
+    technologies: ["React", "TypeScript", "FastAPI", "PyTorch", "OpenAI", "Redis"],
+    liveLink: null,
+    githubLink: "https://github.com/FriedricNietzsche/AutoML"
+  },
+  {
     id: 1,
+    title: "picoCTF Writeups",
+    category: "Exploits",
+    description: "A personal repository documenting my learning process through picoCTF challenges. Contains detailed writeups and solutions to track progress in cryptography and exploitation.",
+    image: picoFlagImg,
+    features: [
+      "Detailed Walkthroughs",
+      "Exploit Scripts",
+      "CTF Skill Tracking"
+    ],
+    technologies: ["Python", "Bash", "C", "Cryptography", "Reverse Engineering"],
+    liveLink: null,
+    githubLink: "https://github.com/MohamedEBR/picoCTF"
+  },
+  {
+    id: 2,
+    title: "AI SaaS Chatbot",
+    category: "Full-Stack",
+    description: "Full-stack MERN AI chatbot with secure authentication (HTTP-only cookies), per-user persistent chat history, and OpenAI GPT-3.5 integration.",
+    image: chatbotImg,
+    features: [
+      "Secure Auth (HTTP-only Cookies)",
+      "Persistent Chat History",
+      "OpenAI Integration"
+    ],
+    technologies: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Material UI", "OpenAI"],
+    liveLink: "https://ai-mern-chatbot.netlify.app",
+    githubLink: "https://github.com/MohamedEBR/AI-SaaS-Chat-Bot"
+  },
+  {
+    id: 3,
     title: "Karate Club Management",
     category: "Full-Stack",
     description: "Secure management system for martial arts academy. Implemented RBAC, payment gateways, and automated alert systems.",
@@ -26,7 +75,7 @@ const projects = [
     githubLink: "https://github.com/MohamedEBR/panacea-2.0"
   },
   {
-    id: 2,
+    id: 4,
     title: "DiscoverMyUni",
     category: "Full-Stack",
     description: "Built and deployed content ingestion pipelines for a student platform serving 500+ users. Improved event extraction accuracy to 85% via ML-assisted parsing.",
@@ -40,11 +89,11 @@ const projects = [
     githubLink: "https://github.com/discovermyuni/discovermyuni.org"
   },
   {
-    id: 3,
+    id: 5,
     title: "Network Intrusion Detection",
     category: "Exploits",
     description: "End-to-end supervised learning pipeline for flow-based intrusion detection on UNSW NB15 dataset. Achieved 0.987 PR AUC and 0.983 ROC AUC.",
-    image: chatbotImg, // Using placeholder or need a new one. I'll stick with chatbotImg for now or find a better generic one if available, but sticking to existing imports is safer.
+    image: networkSecurityImg,
     features: [
       "XGBoost Binary Detection",
       "Pydantic Feature Contracts",
@@ -54,6 +103,21 @@ const projects = [
       "Python", "XGBoost", "PyTorch", "Zeek", "Argus", "Scikit-Learn", "Pydantic"
     ],
     githubLink: "https://github.com/MohamedEBR"
+  },
+  {
+    id: 6,
+    title: "MyShell",
+    category: "Tools",
+    description: "A custom Unix-like shell implementation in C. Supporting process creation (fork/exec), signal handling, and I/O redirection.",
+    image: myShellImg,
+    features: [
+      "Process Management (Fork/Exec)",
+      "Signal Handling",
+      "I/O Redirection"
+    ],
+    technologies: ["C", "Linux", "Bash", "Systems Programming"],
+    liveLink: null,
+    githubLink: null
   }
 ]
 
@@ -111,6 +175,13 @@ const ProjectCard = ({ project, index }) => {
       'Stripe': SiStripe,
       'Material UI': SiMui,
       'OpenAI': SiOpenai,
+      'FastAPI': SiFastapi,
+      'PyTorch': SiPytorch,
+      'Redis': SiRedis,
+      'Scikit-Learn': SiScikitlearn,
+      'Bash': SiGnubash,
+      'C': SiC,
+      'Linux': SiLinux,
     }
     const Icon = icons[tech] || HiCode
     return <Icon className="w-3 h-3 text-secondary" />
@@ -137,7 +208,7 @@ const ProjectCard = ({ project, index }) => {
         <OptimizedImage
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 grayscale hover:grayscale-0"
+          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
         />
 
         {/* Scanline overlay */}
