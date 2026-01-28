@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { HiMail, HiPhone, HiLocationMarker, HiPaperAirplane, HiCheck } from 'react-icons/hi'
+import { HiMail, HiPhone, HiLocationMarker, HiPaperAirplane, HiCheck, HiTerminal } from 'react-icons/hi'
 import { BsLinkedin, BsGithub, BsInstagram } from 'react-icons/bs'
 import emailjs from '@emailjs/browser'
 
@@ -10,22 +10,22 @@ const ContactInfo = ({ icon: Icon, title, info, href, delay = 0 }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.2 }}
     transition={{ duration: 0.6, delay }}
-    className="flex items-center space-x-4 p-6 bg-white dark:bg-dark-secondary rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-gray-100 dark:border-gray-700 group"
+    className="flex items-center space-x-4 p-6 bg-black/80 rounded-sm shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_rgba(0,255,65,0.2)] transition-all duration-300 border border-secondary/20 hover:border-secondary group font-mono"
   >
-    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-300">
-      <Icon className="w-6 h-6 text-accent group-hover:text-white" />
+    <div className="w-12 h-12 bg-secondary/10 rounded-sm flex items-center justify-center group-hover:bg-secondary group-hover:text-black transition-all duration-300 border border-secondary/20">
+      <Icon className="w-6 h-6 text-secondary group-hover:text-black transition-colors" />
     </div>
     <div>
-      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{title}</h4>
+      <h4 className="font-bold text-white mb-1 uppercase tracking-wider">{title}</h4>
       {href ? (
-        <a 
+        <a
           href={href}
-          className="text-gray-600 dark:text-gray-300 hover:text-accent transition-colors duration-200"
+          className="text-gray-400 hover:text-secondary transition-colors duration-200"
         >
           {info}
         </a>
       ) : (
-        <p className="text-gray-600 dark:text-gray-300">{info}</p>
+        <p className="text-gray-400">{info}</p>
       )}
     </div>
   </motion.div>
@@ -41,10 +41,10 @@ const SocialLink = ({ href, icon: Icon, label, delay = 0 }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="w-12 h-12 bg-white dark:bg-dark-secondary rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-accent hover:bg-accent/10 transition-all duration-300 shadow-card border border-gray-100 dark:border-gray-700"
+    className="w-12 h-12 bg-black rounded-sm flex items-center justify-center text-gray-400 hover:text-secondary hover:bg-secondary/10 transition-all duration-300 shadow-md border border-secondary/20 hover:border-secondary group"
     aria-label={label}
   >
-    <Icon className="w-5 h-5" />
+    <Icon className="w-5 h-5 group-hover:glow-secondary" />
   </motion.a>
 )
 
@@ -61,27 +61,27 @@ const Contact = () => {
 
   const validateForm = () => {
     const newErrors = {}
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required'
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid'
     }
-    
+
     if (!formData.subject.trim()) {
       newErrors.subject = 'Subject is required'
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required'
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters'
     }
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -89,7 +89,7 @@ const Contact = () => {
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
-    
+
     // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }))
@@ -98,9 +98,9 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (!validateForm()) return
-    
+
     setIsSubmitting(true)
     setSubmitStatus(null)
 
@@ -119,17 +119,17 @@ const Contact = () => {
       }
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
-      
+
       setSubmitStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus(null), 5000)
-      
+
     } catch (error) {
       console.error('Error sending email:', error)
       setSubmitStatus('error')
-      
+
       // Reset error message after 5 seconds
       setTimeout(() => setSubmitStatus(null), 5000)
     } finally {
@@ -161,42 +161,42 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-dark-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-10 bg-primary relative overflow-hidden">
+      {/* Background scanline effect */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] pointer-events-none bg-[length:100%_2px,3px_100%] opacity-20" />
+
+      <div className="w-full px-[7%] relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 font-mono"
         >
-          <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-4">
-            Get In Touch
+          <span className="inline-block px-4 py-2 bg-secondary/10 border border-secondary text-secondary rounded-sm text-sm font-bold mb-4 tracking-wider">
+            ./COMMUNICATION
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Let's{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent-dark">
-              Connect
-            </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
+            Establish <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-600">Uplink</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Interested in collaborating or discussing an opportunity? I’d love to hear from you.
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            &gt; Secure channels open for collaboration and opportunities.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 font-mono">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-              Contact Information
+            <h3 className="text-2xl font-bold text-white mb-8 flex items-center">
+              <span className="text-secondary mr-2">&gt;</span> Channel Information
             </h3>
-            
+
             <div className="space-y-6 mb-12">
               {contactInfo.map((item, index) => (
                 <ContactInfo key={index} {...item} />
@@ -205,8 +205,8 @@ const Contact = () => {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Follow Me
+              <h4 className="text-lg font-bold text-white mb-4 uppercase tracking-wider">
+                Find Me On The Network
               </h4>
               <div className="flex space-x-4">
                 <SocialLink
@@ -236,16 +236,19 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-12 p-6 bg-accent/5 dark:bg-accent/10 rounded-xl border border-accent/20"
+              className="mt-12 p-6 bg-black/50 rounded-sm border border-secondary/20 relative"
             >
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Looking for opportunities in:
+              <div className="absolute top-0 right-0 p-2 opacity-50">
+                <HiTerminal className="text-secondary w-6 h-6" />
+              </div>
+              <h4 className="font-bold text-secondary mb-2 uppercase tracking-wide">
+                Target Objectives:
               </h4>
-              <ul className="text-gray-600 dark:text-gray-300 space-y-1">
-                <li>• Software Development Internships</li>
-                <li>• Full-Stack Development Co-ops</li>
-                <li>• Information Security Roles</li>
-                <li>• Open Source Collaborations</li>
+              <ul className="text-gray-400 space-y-1 text-sm">
+                <li>&gt; Software Development Internships</li>
+                <li>&gt; Full-Stack Development Co-ops</li>
+                <li>&gt; Information Security Roles</li>
+                <li>&gt; Open Source Collaborations</li>
               </ul>
             </motion.div>
           </motion.div>
@@ -254,12 +257,19 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8 }}
-            className="bg-white dark:bg-dark-secondary rounded-2xl p-8 shadow-card border border-gray-100 dark:border-gray-700"
+            className="bg-black/80 rounded-sm p-8 shadow-[0_0_20px_rgba(0,0,0,0.5)] border border-secondary/20 relative"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-              Send a Message
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-secondary" />
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-secondary" />
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-secondary" />
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-secondary" />
+
+            <h3 className="text-2xl font-bold text-white mb-8 flex items-center">
+              <span className="w-2 h-6 bg-secondary mr-3 animate-pulse"></span>
+              Transmit Message
             </h3>
 
             {/* Status Messages */}
@@ -267,11 +277,11 @@ const Contact = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg flex items-center"
+                className="mb-6 p-4 bg-green-900/20 border border-green-700 rounded-sm flex items-center"
               >
-                <HiCheck className="w-5 h-5 text-green-600 dark:text-green-400 mr-3" />
-                <span className="text-green-800 dark:text-green-200">
-                  Message sent successfully! I'll get back to you soon.
+                <HiCheck className="w-5 h-5 text-green-400 mr-3" />
+                <span className="text-green-200">
+                  Transmision successful. Awaiting acknowledgement.
                 </span>
               </motion.div>
             )}
@@ -280,10 +290,10 @@ const Contact = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg"
+                className="mb-6 p-4 bg-red-900/20 border border-red-700 rounded-sm"
               >
-                <span className="text-red-800 dark:text-red-200">
-                  Oops! Something went wrong. Please try again or email me directly.
+                <span className="text-red-200">
+                  Transmission failed. Signal lost. Please retry or use direct link.
                 </span>
               </motion.div>
             )}
@@ -291,8 +301,8 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Full Name *
+                <label htmlFor="name" className="block text-sm font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                  Sender Identity *
                 </label>
                 <input
                   type="text"
@@ -300,22 +310,21 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white dark:bg-dark-primary text-gray-900 dark:text-white ${
-                    errors.name 
-                      ? 'border-red-300 dark:border-red-600' 
-                      : 'border-gray-300 dark:border-gray-600'
-                  }`}
-                  placeholder="Your full name"
+                  className={`w-full px-4 py-3 border bg-black text-white focus:outline-none focus:border-secondary transition-colors duration-200 font-mono ${errors.name
+                    ? 'border-red-600'
+                    : 'border-gray-800'
+                    }`}
+                  placeholder="ENTER_NAME"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.name}</p>
                 )}
               </div>
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email Address *
+                <label htmlFor="email" className="block text-sm font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                  Return Address *
                 </label>
                 <input
                   type="email"
@@ -323,22 +332,21 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white dark:bg-dark-primary text-gray-900 dark:text-white ${
-                    errors.email 
-                      ? 'border-red-300 dark:border-red-600' 
-                      : 'border-gray-300 dark:border-gray-600'
-                  }`}
-                  placeholder="your.email@example.com"
+                  className={`w-full px-4 py-3 border bg-black text-white focus:outline-none focus:border-secondary transition-colors duration-200 font-mono ${errors.email
+                    ? 'border-red-600'
+                    : 'border-gray-800'
+                    }`}
+                  placeholder="ENTER_EMAIL"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.email}</p>
                 )}
               </div>
 
               {/* Subject */}
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Subject *
+                <label htmlFor="subject" className="block text-sm font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                  Transmission Header *
                 </label>
                 <input
                   type="text"
@@ -346,22 +354,21 @@ const Contact = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white dark:bg-dark-primary text-gray-900 dark:text-white ${
-                    errors.subject 
-                      ? 'border-red-300 dark:border-red-600' 
-                      : 'border-gray-300 dark:border-gray-600'
-                  }`}
-                  placeholder="What's this about?"
+                  className={`w-full px-4 py-3 border bg-black text-white focus:outline-none focus:border-secondary transition-colors duration-200 font-mono ${errors.subject
+                    ? 'border-red-600'
+                    : 'border-gray-800'
+                    }`}
+                  placeholder="ENTER_SUBJECT"
                 />
                 {errors.subject && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.subject}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.subject}</p>
                 )}
               </div>
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Message *
+                <label htmlFor="message" className="block text-sm font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                  Payload *
                 </label>
                 <textarea
                   id="message"
@@ -369,15 +376,14 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white dark:bg-dark-primary text-gray-900 dark:text-white resize-none ${
-                    errors.message 
-                      ? 'border-red-300 dark:border-red-600' 
-                      : 'border-gray-300 dark:border-gray-600'
-                  }`}
-                  placeholder="Tell me about your project, opportunity, or just say hello..."
+                  className={`w-full px-4 py-3 border bg-black text-white resize-none focus:outline-none focus:border-secondary transition-colors duration-200 font-mono ${errors.message
+                    ? 'border-red-600'
+                    : 'border-gray-800'
+                    }`}
+                  placeholder="ENTER_MESSAGE_CONTENT..."
                 />
                 {errors.message && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.message}</p>
                 )}
               </div>
 
@@ -387,21 +393,20 @@ const Contact = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02, transition: { duration: 0.3, ease: 'easeOut' } }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
-                  isSubmitting
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-accent hover:bg-accent-dark shadow-lg hover:shadow-xl'
-                } text-white`}
+                className={`w-full py-4 px-6 font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center space-x-2 border ${isSubmitting
+                  ? 'bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed'
+                  : 'bg-secondary/10 border-secondary text-secondary hover:bg-secondary hover:text-black shadow-[0_0_10px_rgba(0,255,65,0.2)]'
+                  }`}
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Sending...</span>
+                    <div className="w-5 h-5 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
+                    <span>TRANSMITTING...</span>
                   </>
                 ) : (
                   <>
-                    <HiPaperAirplane className="w-5 h-5" />
-                    <span>Send Message</span>
+                    <HiPaperAirplane className="w-5 h-5 transform rotate-90" />
+                    <span>SEND_TRANSMISSION</span>
                   </>
                 )}
               </motion.button>

@@ -12,7 +12,7 @@ const Projects = lazy(() => import('./container/Projects/Projects'))
 const Skills = lazy(() => import('./container/Skills/Skills'))
 const Testimonials = lazy(() => import('./container/Testimonial/Testimonial'))
 const Contact = lazy(() => import('./container/Contact/Contact'))
-const Clubs = lazy(() => import('./container/Clubs/Clubs'))
+const GithubActivity = lazy(() => import('./container/GithubActivity/GithubActivity'))
 
 function App() {
   const [isDarkMode, toggleDarkMode] = useDarkMode()
@@ -21,36 +21,38 @@ function App() {
     <ErrorBoundary>
       <div className="min-h-screen bg-gray-50 dark:bg-dark-primary transition-colors duration-300">
         <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-        
+
         <main>
           <Suspense fallback={<LoadingSpinner />}>
             <Header />
           </Suspense>
-          
+
           <Suspense fallback={<LoadingSpinner />}>
             <AboutMe />
           </Suspense>
-          
+
+          {/* <Suspense fallback={<LoadingSpinner />}>
+            <GithubActivity />
+          </Suspense> */}
+
           <Suspense fallback={<LoadingSpinner />}>
             <Experience />
           </Suspense>
 
-          <Suspense fallback={<LoadingSpinner />}>
-            <Clubs />
-          </Suspense>
-          
+
+
           <Suspense fallback={<LoadingSpinner />}>
             <Projects />
           </Suspense>
-          
+
           <Suspense fallback={<LoadingSpinner />}>
             <Skills />
           </Suspense>
-          
+
           <Suspense fallback={<LoadingSpinner />}>
             <Testimonials />
           </Suspense>
-          
+
           <Suspense fallback={<LoadingSpinner />}>
             <Contact />
           </Suspense>

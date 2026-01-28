@@ -5,14 +5,14 @@ import { useScrollPosition } from '../../hooks'
 import { cn, smoothScrollTo } from '../../utils'
 
 const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'clubs', label: 'Clubs' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'testimonials', label: 'Testimonials' },
-  { id: 'contact', label: 'Contact' }
+  { id: 'home', label: 'home' },
+  { id: 'about', label: 'about' },
+  { id: 'experience', label: 'experience' },
+  { id: 'clubs', label: 'clubs' },
+  { id: 'projects', label: 'exploits' },
+  { id: 'skills', label: 'skills' },
+  { id: 'testimonials', label: 'logs' },
+  { id: 'contact', label: 'contact' }
 ]
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
@@ -27,7 +27,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     } else {
       document.body.style.overflow = 'unset'
     }
-    
+
     return () => {
       document.body.style.overflow = 'unset'
     }
@@ -42,7 +42,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         const rect = section.getBoundingClientRect()
         return rect.top <= 100 && rect.bottom >= 100
       })
-      
+
       if (currentSection) {
         setActiveSection(currentSection.id)
       }
@@ -65,9 +65,9 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-mono',
           isScrolled
-            ? 'bg-white/90 dark:bg-dark-primary/90 backdrop-blur-md shadow-lg'
+            ? 'bg-primary/95 border-b border-secondary/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5.1px]'
             : 'bg-transparent'
         )}
       >
@@ -77,95 +77,53 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
               className="flex-shrink-0"
             >
               <button
                 onClick={() => handleNavClick('home')}
-                className="text-2xl font-bold text-gray-900 dark:text-white hover:text-accent dark:hover:text-accent transition-colors duration-300 ease-out"
+                className="text-lg font-bold text-secondary hover:text-white transition-colors duration-300"
               >
-                ME
+                <span className="text-white">root@me:</span>
+                <span className="text-secondary">~$</span>
               </button>
             </motion.div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
+              <div className="ml-10 flex items-baseline space-x-1">
                 {navItems.map((item) => (
-                  <motion.button
+                  <button
                     key={item.id}
-                    whileHover={{ scale: 1.02, y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
                     onClick={() => handleNavClick(item.id)}
                     className={cn(
-                      'px-3 py-2 text-sm font-medium transition-all duration-300 ease-out relative',
+                      'px-3 py-2 text-sm font-medium transition-all duration-300 relative group',
                       activeSection === item.id
-                        ? 'text-accent'
-                        : 'text-gray-700 dark:text-gray-200 hover:text-accent dark:hover:text-accent'
+                        ? 'text-secondary'
+                        : 'text-gray/80 hover:text-white'
                     )}
                   >
-                    {item.label}
-                    {activeSection === item.id && (
-                      <motion.div
-                        layoutId="activeSection"
-                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full"
-                        initial={{ opacity: 0, scaleX: 0 }}
-                        animate={{ opacity: 1, scaleX: 1 }}
-                        exit={{ opacity: 0, scaleX: 0 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                      />
-                    )}
-                  </motion.button>
+                    <span className="relative z-10">
+                      {activeSection === item.id && <span className="mr-1">&gt;</span>}
+                      {item.label}
+                    </span>
+                    {/* Hover effect background */}
+                    <span className="absolute inset-0 bg-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
+                  </button>
                 ))}
               </div>
             </div>
 
-            {/* Dark Mode Toggle & Mobile Menu Button */}
+            {/* Dark Mode Toggle (Disabled for security theme as it's dark only usually, but keeping for compatibility if needed or changing to a "light switch" for fun) */}
+            {/* Leaving Toggle for now but it might just switch between Green and Red themes later? For now, stick to original functionality or hide it if dark mode is forced. */}
             <div className="flex items-center space-x-2">
-              {/* Dark Mode Toggle */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 ease-out"
-                aria-label="Toggle dark mode"
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={isDarkMode ? 'moon' : 'sun'}
-                    initial={{ rotate: -45, opacity: 0, scale: 0.8 }}
-                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                    exit={{ rotate: 45, opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
-                    {isDarkMode ? <HiMoon className="w-5 h-5" /> : <HiSun className="w-5 h-5" />}
-                  </motion.div>
-                </AnimatePresence>
-              </motion.button>
-
               {/* Mobile menu button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+              <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 rounded-full bg-accent text-white hover:bg-accent-dark transition-colors duration-300 ease-out"
+                className="md:hidden p-2 text-secondary hover:text-white transition-colors duration-300"
                 aria-label="Open menu"
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={isOpen ? 'close' : 'open'}
-                    initial={{ rotate: -45, opacity: 0, scale: 0.8 }}
-                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                    exit={{ rotate: 45, opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
-                    {isOpen ? <HiX className="w-6 h-6" /> : <HiMenuAlt3 className="w-6 h-6" />}
-                  </motion.div>
-                </AnimatePresence>
-              </motion.button>
+                {isOpen ? <HiX className="w-6 h-6" /> : <HiMenuAlt3 className="w-6 h-6" />}
+              </button>
             </div>
           </div>
         </div>
@@ -181,62 +139,55 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm md:hidden"
             />
-            
+
             {/* Mobile Menu */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300, duration: 0.3 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[80vw] bg-white dark:bg-dark-secondary shadow-xl md:hidden"
+              className="fixed top-0 right-0 bottom-0 z-50 w-64 bg-black border-l border-secondary/30 md:hidden font-mono"
             >
               <div className="flex flex-col h-full">
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">Menu</h2>
+                <div className="flex items-center justify-between p-6 border-b border-lightGray">
+                  <span className="text-secondary font-bold">./menu</span>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300 ease-out"
+                    className="text-gray-400 hover:text-white"
                   >
-                    <HiX className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+                    <HiX className="w-6 h-6" />
                   </button>
                 </div>
 
                 {/* Navigation Items */}
-                <nav className="flex-1 px-6 py-8">
-                  <ul className="space-y-4">
-                    {navItems.map((item, index) => (
-                      <motion.li
-                        key={item.id}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.05, duration: 0.3, ease: "easeOut" }}
-                      >
-                        <motion.button
-                          whileHover={{ x: 4, scale: 1.01 }}
-                          whileTap={{ scale: 0.99 }}
-                          transition={{ duration: 0.3, ease: "easeOut" }}
+                <nav className="flex-1 px-4 py-8">
+                  <ul className="space-y-2">
+                    {navItems.map((item) => (
+                      <li key={item.id}>
+                        <button
                           onClick={() => handleNavClick(item.id)}
                           className={cn(
-                            'block w-full text-left px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 ease-out',
+                            'block w-full text-left px-4 py-3 text-base transition-all duration-300',
                             activeSection === item.id
-                              ? 'bg-accent text-white shadow-lg'
-                              : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
+                              ? 'text-black bg-secondary font-bold'
+                              : 'text-gray-300 hover:text-secondary hover:bg-white/5'
                           )}
                         >
+                          {activeSection === item.id && <span className="mr-2">&gt;</span>}
                           {item.label}
-                        </motion.button>
-                      </motion.li>
+                        </button>
+                      </li>
                     ))}
                   </ul>
                 </nav>
 
                 {/* Footer */}
-                <div className="p-6 border-t border-gray-200 dark:border-gray-700">
-                  <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-                    © 2025 Mohamed Ebraheem
+                <div className="p-6 border-t border-lightGray">
+                  <div className="text-center text-xs text-gray-500">
+                    UID: 0 (root)
                   </div>
                 </div>
               </div>

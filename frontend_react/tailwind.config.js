@@ -8,33 +8,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#ef4444', // Main red accent
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
-          950: '#450a0a',
-        },
-        accent: {
-          DEFAULT: '#AC3131', // Your preferred red accent
-          light: '#D45C5C',
-          dark: '#8B2828',
-        },
-        dark: {
-          primary: '#0F172A',
-          secondary: '#1E293B',
-          tertiary: '#334155',
-          text: '#F8FAFC',
-        }
+        primary: '#1e1e2e', // Catppuccin Mocha Base
+        secondary: '#a6e3a1', // Catppuccin Mocha Green
+        black: '#11111b', // Catppuccin Mocha Crust
+        lightGray: '#313244', // Catppuccin Mocha Surface0
+        gray: '#a6adc8', // Catppuccin Mocha Subtext0
+        brown: '#46364a',
+        white: '#cdd6f4', // Catppuccin Mocha Text
+        // New Security Theme Colors
+        'terminal-green': '#a6e3a1',
+        'cyber-pink': '#f38ba8', // Catppuccin Mocha Red
+        'dark-card': '#181825', // Catppuccin Mocha Mantle
+        // Catppuccin Specifics
+        'cat-base': '#1e1e2e',
+        'cat-mantle': '#181825',
+        'cat-crust': '#11111b',
+        'cat-text': '#cdd6f4',
+        'cat-green': '#a6e3a1',
+        'cat-blue': '#89b4fa',
+        'cat-red': '#f38ba8',
+        'cat-peach': '#fab387',
       },
       fontFamily: {
-        sans: ['DM Sans', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+        display: ['VT323', 'monospace'],
+        sans: ['Fira Code', 'monospace'], // Default to mono for this theme
+      },
+      backgroundImage: {
+        'terminal-scanline': 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))',
       },
       fontSize: {
         'display-1': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],

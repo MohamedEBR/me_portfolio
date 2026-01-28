@@ -1,135 +1,132 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { HiBriefcase, HiCalendar, HiLocationMarker, HiExternalLink } from 'react-icons/hi'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { HiCalendar, HiLocationMarker, HiExternalLink, HiAcademicCap, HiBriefcase } from 'react-icons/hi'
 import { BsGithub } from 'react-icons/bs'
+import { images } from '../../constants'
 
-const ExperienceCard = ({ experience, index, isLast }) => {
-  const isEven = index % 2 === 0
-
+const TimelineCard = ({ data, index }) => {
   return (
     <motion.div
+      layout
       initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
-      className={`flex ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center mb-12 lg:mb-16 relative`}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="w-full md:w-[calc(50%-1.5rem)] flex flex-col font-mono"
     >
-      {/* Timeline line */}
-      {!isLast && (
-        <div className="absolute left-4 lg:left-1/2 top-16 w-0.5 h-32 bg-gradient-to-b from-accent to-accent/20 transform lg:-translate-x-0.5 z-0"></div>
-      )}
-      
-      {/* Timeline dot */}
-      <div className={`absolute ${isEven ? 'left-4 lg:left-1/2' : 'left-4 lg:left-1/2'} top-6 w-8 h-8 bg-accent rounded-full border-4 border-white dark:border-dark-primary shadow-lg flex items-center justify-center transform lg:-translate-x-1/2 z-10`}>
-        <HiBriefcase className="w-4 h-4 text-white" />
-      </div>
+      <motion.div
+        className="bg-black/80 rounded-sm p-6 shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_rgba(166,227,161,0.2)] transition-all duration-300 border border-secondary/20 hover:border-secondary relative flex-1 flex flex-col h-full"
+      >
+        {/* Decorative Corner */}
+        <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-secondary/50"></div>
 
-      {/* Content */}
-      <div className={`flex-1 ${isEven ? 'lg:pr-12 ml-12 lg:ml-0' : 'lg:pl-12 ml-12 lg:ml-0'} lg:w-1/2`}>
-        <motion.div
-          whileHover={{ scale: 1.02, y: -5, transition: { duration: 0.3, ease: 'easeOut' } }}
-          className="bg-white dark:bg-dark-secondary rounded-xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 border border-gray-100 dark:border-gray-700"
-        >
-          {/* Company and Role */}
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                {experience.role}
-              </h3>
-              <div className="flex items-center text-accent font-semibold mb-2">
-                <HiBriefcase className="w-4 h-4 mr-2" />
-                {experience.company}
-              </div>
+        {/* Role & Company */}
+        <div className="flex items-start justify-between mb-4 flex-col sm:flex-row">
+          <div>
+            <h3 className="text-xl font-bold text-white mb-1 uppercase tracking-wider">
+              {data.role}
+            </h3>
+            <div className="flex items-center text-secondary font-bold mb-2">
+              <span className="mr-2">&gt;</span>
+              {data.company}
             </div>
-            {experience.logo && (
-              <img 
-                src={experience.logo} 
-                alt={`${experience.company} logo`}
-                className="w-12 h-12 rounded-lg object-cover shadow-sm"
+          </div>
+          {data.logo && (
+            <div className="mt-2 sm:mt-0 p-1 bg-white/10 rounded-sm">
+              <img
+                src={data.logo}
+                alt={`${data.company} logo`}
+                className="w-12 h-12 object-cover"
               />
-            )}
-          </div>
-
-          {/* Date and Location */}
-          <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
-            <div className="flex items-center">
-              <HiCalendar className="w-4 h-4 mr-2" />
-              {experience.period}
             </div>
-            <div className="flex items-center">
-              <HiLocationMarker className="w-4 h-4 mr-2" />
-              {experience.location}
-            </div>
+          )}
+        </div>
+
+        {/* Meta Info */}
+        <div className="flex flex-wrap gap-4 mb-4 text-xs font-bold text-gray-500 uppercase tracking-widest border-b border-gray-800 pb-4">
+          <div className="flex items-center">
+            <HiCalendar className="w-4 h-4 mr-2" />
+            {data.period}
           </div>
+          <div className="flex items-center">
+            <HiLocationMarker className="w-4 h-4 mr-2" />
+            {data.location}
+          </div>
+        </div>
 
-          {/* Description */}
-          <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-            {experience.description}
-          </p>
+        {/* Description */}
+        <p className="text-gray-400 mb-4 leading-relaxed text-sm">
+          {data.description}
+        </p>
 
-          {/* Key Achievements */}
-          <div className="mb-4">
-            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Key Achievements:</h4>
+        {/* Achievements/Contributions */}
+        {data.achievements?.length > 0 && (
+          <div className="mb-4 flex-grow">
+            <h4 className="text-sm font-bold text-white mb-2 uppercase">Execution Logs:</h4>
             <ul className="space-y-1">
-              {experience.achievements.map((achievement, idx) => (
-                <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
-                  <span className="w-1.5 h-1.5 bg-accent rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                  {achievement}
+              {data.achievements.map((item, idx) => (
+                <li key={idx} className="text-sm text-gray-400 flex items-start">
+                  <span className="text-secondary mr-2 mt-0.5">$</span>
+                  {item}
                 </li>
               ))}
             </ul>
           </div>
+        )}
 
-          {/* Technologies */}
-          <div className="mb-4">
-            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Technologies Used:</h4>
+        {/* Tech Stack */}
+        {data.technologies?.length > 0 && (
+          <div className="mb-4 pt-4 border-t border-gray-800">
+            <h4 className="text-sm font-bold text-white mb-2 uppercase">Tech_Stack:</h4>
             <div className="flex flex-wrap gap-2">
-              {experience.technologies.map((tech, idx) => (
+              {data.technologies.map((tech, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 bg-accent/10 text-accent text-xs font-medium rounded-full border border-accent/20"
+                  className="px-2 py-1 bg-secondary/10 text-secondary text-xs font-bold border border-secondary/20"
                 >
                   {tech}
                 </span>
               ))}
             </div>
           </div>
+        )}
 
-          {/* Links */}
-          {(experience.projectLink || experience.githubLink) && (
-            <div className="flex gap-3 pt-2">
-              {experience.projectLink && (
-                <a
-                  href={experience.projectLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm text-accent hover:text-accent-dark transition-colors duration-200"
-                >
-                  <HiExternalLink className="w-4 h-4 mr-1" />
-                  View Project
-                </a>
-              )}
-              {experience.githubLink && (
-                <a
-                  href={experience.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-accent transition-colors duration-200"
-                >
-                  <BsGithub className="w-4 h-4 mr-1" />
-                  Source Code
-                </a>
-              )}
-            </div>
-          )}
-        </motion.div>
-      </div>
+        {/* Links */}
+        {(data.projectLink || data.githubLink) && (
+          <div className="flex gap-3 pt-2 mt-auto border-t border-gray-800">
+            {data.projectLink && (
+              <a
+                href={data.projectLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-sm text-secondary hover:text-white transition-colors duration-200 font-bold"
+              >
+                <HiExternalLink className="w-4 h-4 mr-1" />
+                LIVE_TARGET
+              </a>
+            )}
+            {data.githubLink && (
+              <a
+                href={data.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-sm text-gray-500 hover:text-secondary transition-colors duration-200 font-bold"
+              >
+                <BsGithub className="w-4 h-4 mr-1" />
+                ACCESS_SOURCE
+              </a>
+            )}
+          </div>
+        )}
+      </motion.div>
     </motion.div>
   )
 }
 
 const Experience = () => {
-  const experiences = [
+  const [activeTab, setActiveTab] = useState('work') // 'work' | 'clubs'
+
+  const workExperience = [
     {
       role: "Web Developer",
       company: "Panacea Karate Academy",
@@ -143,45 +140,152 @@ const Experience = () => {
         "Containerized services with Docker to standardize environments and streamline deployment."
       ],
       technologies: ["React", "Material UI", "Spring Boot", "PostgreSQL", "Stripe", "Docker", "SendGrid", "JWT", "RBAC"],
-  projectLink: "https://panaceakarateacademy.ca/"
+      projectLink: "https://panaceakarateacademy.ca/"
     }
   ]
 
+  const clubExperience = [
+    {
+      role: "Software Engineering Associate",
+      company: "Math & CS Society (MCSS)",
+      period: "Aug 2025 - Present",
+      location: "Mississauga, ON",
+      description: "Building developer-facing platforms for 500+ students and designing secure backend architectures.",
+      achievements: [
+        "Designed a secure backend intent/action architecture that eliminated direct LLM-to-SQL execution.",
+        "Implemented rate limiting and abuse protection for event subscription APIs, preventing circumvention.",
+        "Built a shared session system using Redis and JWT authentication for scalable conversational context.",
+        "Deployed production platform improving reliability through iterative monitoring and user feedback."
+      ],
+      technologies: ["React", "Redis", "JWT", "LLM Integration", "Secure Architecture"],
+      projectLink: "https://deerhacks.ca/",
+      logo: images.utmmcssLogo
+    },
+    {
+      role: "Web Development Lead",
+      company: "UTASR Autonomous Racing",
+      period: "Oct 2024 – Present",
+      location: "Mississauga, ON",
+      description: "Leading a 6-member engineering team to build real-time telemetry platforms and Node.js/TS backend services.",
+      achievements: [
+        "Designed and implemented backend services in Node.js and TypeScript, processing thousands of telemetry messages.",
+        "Built optimized TCP and WebSocket pipelines, reducing end-to-end latency by 30% through edge-case hardening.",
+        "Deployed services on AWS (EC2/NGINX) achieving 99% uptime with TLS/JWT auth.",
+        "Authored internal technical documentation to support maintainability and rapid contributor onboarding."
+      ],
+      technologies: [
+        "Node.js", "TypeScript", "WebSockets", "AWS (EC2/NGINX)", "TCP", "Telemetry", "React"
+      ],
+      projectLink: "https://utasrteam.ca/",
+      logo: images.utasrLogo
+    }
+  ]
+
+  const educationData = [
+    {
+      role: "Bachelor of Science in Computer Science",
+      company: "University of Toronto",
+      period: "Expected Apr 2028",
+      location: "Toronto, ON",
+      description: "Specialist in Computer Science, Minor in Mathematics.",
+      achievements: [
+        "GPA: 3.75 / 4.0",
+        "Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming, Software Design, Computer Organization",
+        "Machine Learning, Probability I & II, Linear Regression Analysis, Linear Algebra II, Calculus III"
+      ],
+      technologies: ["Data Structures", "Algorithms", "OOP", "Software Design", "Machine Learning", "Mathematics"],
+      logo: images.uoftMain // Assuming this image exists from previous steps
+    }
+  ]
+
+  let activeData = []
+  if (activeTab === 'work') activeData = workExperience
+  else if (activeTab === 'clubs') activeData = clubExperience
+  else if (activeTab === 'education') activeData = educationData
+
   return (
-    <section id="experience" className="py-20 bg-white dark:bg-dark-secondary">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-10 bg-primary relative overflow-hidden">
+      {/* Background vertical lines */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px)] bg-[size:4rem_100%] opacity-20 pointer-events-none" />
+
+      <div className="w-full px-[7%] relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 font-mono"
         >
-          <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-4">
-            Professional Journey
+          <span className="inline-block px-4 py-2 bg-secondary/10 border border-secondary text-secondary rounded-sm text-sm font-bold mb-4 tracking-wider">
+            ./CAREER_PATH
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Work{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent-dark">
-              Experience
-            </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
+            Experience <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-600">&</span> Education
           </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Shipping real features with security, clarity, and teamwork
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto border-b border-gray-800 pb-4">
+            &gt; Validated skills in production environments and academic excellence.
           </p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={index}
-              experience={experience}
-              index={index}
-              isLast={index === experiences.length - 1}
+        {/* Custom Toggle Switch */}
+        <div className="flex justify-center mb-16 px-4">
+          <div className="bg-black/50 border border-gray-800 p-1 rounded-full flex relative font-mono text-sm sm:text-base">
+            {/* Sliding Background */}
+            <motion.div
+              layout
+              animate={{
+                x: activeTab === 'work' ? 0 : activeTab === 'clubs' ? '100%' : '200%',
+                width: '33.33%'
+              }}
+              className="absolute top-1 bottom-1 left-1 bg-secondary rounded-full"
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
             />
-          ))}
+
+            <button
+              onClick={() => setActiveTab('work')}
+              className={`relative z-10 px-6 py-3 rounded-full transition-colors duration-300 flex items-center gap-2 w-40 justify-center ${activeTab === 'work' ? 'text-black font-bold' : 'text-gray-400 hover:text-white'}`}
+            >
+              <HiBriefcase className="w-4 h-4" />
+              <span>WORK</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('clubs')}
+              className={`relative z-10 px-6 py-3 rounded-full transition-colors duration-300 flex items-center gap-2 w-40 justify-center ${activeTab === 'clubs' ? 'text-black font-bold' : 'text-gray-400 hover:text-white'}`}
+            >
+              <HiAcademicCap className="w-4 h-4" />
+              <span>CLUBS</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('education')}
+              className={`relative z-10 px-6 py-3 rounded-full transition-colors duration-300 flex items-center gap-2 w-40 justify-center ${activeTab === 'education' ? 'text-black font-bold' : 'text-gray-400 hover:text-white'}`}
+            >
+              <HiAcademicCap className="w-4 h-4" />
+              <span>EDUCATION</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Timeline/Grid */}
+        <div className="relative min-h-[400px]">
+          <AnimatePresence mode='wait'>
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="flex flex-wrap justify-center gap-6"
+            >
+              {activeData.map((item, index) => (
+                <TimelineCard
+                  key={`${activeTab}-${index}`}
+                  data={item}
+                  index={index}
+                />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Call to Action */}
@@ -190,24 +294,14 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="text-center mt-16"
+          className="text-center mt-12 font-mono"
         >
-          <div className="bg-gradient-to-r from-accent/5 to-accent-light/5 dark:from-accent/10 dark:to-accent-light/10 rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Ready for New Opportunities
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-              I’m seeking internships and co-ops where I can contribute immediately, learn quickly, and ship secure, maintainable software.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05, transition: { duration: 0.3, ease: 'easeOut' } }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center px-8 py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-full transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              Let’s Work Together
-            </motion.button>
-          </div>
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center px-8 py-3 bg-secondary text-black font-bold hover:bg-white transition-colors duration-300 shadow-[0_0_20px_rgba(166,227,161,0.2)]"
+          >
+            &gt; HIRE_ME
+          </button>
         </motion.div>
       </div>
     </section>

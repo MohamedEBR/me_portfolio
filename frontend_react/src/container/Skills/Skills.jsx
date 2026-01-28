@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { HiCode, HiDatabase, HiCloud, HiShieldCheck, HiMail } from 'react-icons/hi'
-import { 
+import { motion, AnimatePresence } from 'framer-motion'
+import { HiCode, HiDatabase, HiCloud, HiShieldCheck, HiMail, HiTerminal } from 'react-icons/hi'
+import {
   FaReact, FaJava, FaPython, FaJsSquare, FaGitAlt, FaDocker, FaAws,
-  FaLinux
+  FaLinux, FaCode, FaMicrochip, FaDatabase, FaServer, FaTerminal,
+  FaGithub, FaNodeJs
 } from 'react-icons/fa'
-import { 
+import {
   SiSpringboot, SiDjango, SiPostgresql, SiMongodb, SiTailwindcss,
-  SiTypescript, SiNextdotjs, SiStripe, SiJsonwebtokens,
-  SiGithubactions, SiMysql, SiKubernetes, SiKotlin, SiMui
+  SiTypescript, SiNextdotjs, SiJsonwebtokens,
+  SiGithubactions, SiMysql, SiKubernetes, SiKotlin, SiMui,
+  SiArchlinux, SiNeovim, SiC, SiCplusplus, SiR,
+  SiGnubash, SiGooglecloud, SiMicrosoftazure,
+  SiNginx, SiRedis, SiFirebase, SiSupabase,
+  SiVisualstudiocode, SiIntellijidea, SiPycharm, SiJupyter,
+  SiCsharp, SiPytorch, SiTensorflow, SiScikitlearn
 } from 'react-icons/si'
-import { BiTerminal } from 'react-icons/bi'
+import { BiTerminal, BiBrain } from 'react-icons/bi'
+import { TbMathFunction, TbCpu } from 'react-icons/tb'
 
-const SkillCard = ({ skill, index, category }) => {
+const SkillCard = ({ skill, index }) => {
   const [isHovered, setIsHovered] = useState(false)
 
   const getIcon = (name) => {
@@ -20,244 +27,231 @@ const SkillCard = ({ skill, index, category }) => {
       // Languages
       'Java': FaJava,
       'Python': FaPython,
+      'C': SiC,
+      'C++': SiCplusplus,
+      'C#': SiCsharp,
       'JavaScript': FaJsSquare,
       'TypeScript': SiTypescript,
-      'Kotlin': SiKotlin,
       'SQL': HiDatabase,
-      
-      // Frontend
+      'R': SiR,
+      'Kotlin': SiKotlin,
+      'Bash': SiGnubash,
+
+      // Frameworks
+      'Spring Boot': SiSpringboot,
       'React': FaReact,
+      'Node.js': FaNodeJs,
+      'Express': FaServer,
+      'Django': SiDjango,
+      'Flask': FaServer,
+      'FastAPI': FaServer,
       'Next.js': SiNextdotjs,
       'Tailwind CSS': SiTailwindcss,
       'Material UI': SiMui,
-      
-      // Backend
-      'Spring Boot': SiSpringboot,
-      'Django': SiDjango,
-      'Node.js': HiCode,
-      
+
+      // ML / AI
+      'PyTorch': SiPytorch,
+      'TensorFlow': SiTensorflow,
+      'Scikit-Learn': SiScikitlearn,
+      'OpenCV': TbCpu,
+      'XGBoost': TbMathFunction,
+      'Pandas': FaDatabase,
+      'NumPy': TbMathFunction,
+
       // Databases
       'PostgreSQL': SiPostgresql,
-      'MongoDB': SiMongodb,
       'MySQL': SiMysql,
-      
-      // DevOps & Cloud
-      'Docker': FaDocker,
+      'MongoDB': SiMongodb,
+      'Redis': SiRedis,
+      'Firebase': SiFirebase,
+      'Supabase': SiSupabase,
+
+      // Cloud & DevOps
       'AWS': FaAws,
-      'GitHub Actions': SiGithubactions,
+      'GCP': SiGooglecloud,
+      'Azure': SiMicrosoftazure,
+      'Docker': FaDocker,
       'Kubernetes': SiKubernetes,
+      'NGINX': SiNginx,
       'Linux': FaLinux,
-      
+      'Arch Linux': SiArchlinux,
+      'GitHub Actions': SiGithubactions,
+      'Jenkins': FaServer,
+      'TravisCI': FaServer,
+
       // Security & Auth
       'JWT': SiJsonwebtokens,
       'OWASP': HiShieldCheck,
       'RBAC': HiShieldCheck,
-      
-      // APIs & Integration
-      'Stripe': SiStripe,
-      'SendGrid': HiMail,
-      'REST APIs': HiCode,
-      
+
       // Tools
       'Git': FaGitAlt,
-      'GitHub': FaGitAlt,
-      'Terminal': BiTerminal,
+      'GitHub': FaGithub,
+      'VS Code': SiVisualstudiocode,
+      'IntelliJ IDEA': SiIntellijidea,
+      'PyCharm': SiPycharm,
+      'Neovim': SiNeovim,
+      'Jupyter': SiJupyter,
+      'Terminal': FaTerminal,
     }
-    return icons[name] || HiCode
-  }
-
-  const getCategoryColor = (cat) => {
-    const colors = {
-      'Languages': 'from-blue-500 to-blue-600',
-      'Frontend': 'from-green-500 to-green-600',
-      'Backend': 'from-purple-500 to-purple-600',
-      'Database': 'from-orange-500 to-orange-600',
-      'DevOps': 'from-red-500 to-red-600',
-      'Security': 'from-yellow-500 to-yellow-600',
-      'Tools': 'from-gray-500 to-gray-600'
-    }
-    return colors[cat] || 'from-accent to-accent-dark'
+    const IconComponent = icons[name] || HiCode
+    return IconComponent
   }
 
   const Icon = getIcon(skill.name)
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.9 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
-      whileHover={{ scale: 1.03, y: -3, transition: { duration: 0.3, ease: 'easeOut' } }}
+      layout
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.3 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="relative group"
+      className="relative group font-mono"
     >
-      <div className="bg-white dark:bg-dark-secondary rounded-xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 ease-out border border-gray-100 dark:border-gray-700 hover:border-accent/20 h-full flex flex-col items-center text-center">
+      <div className="bg-black/80 rounded-sm p-4 border border-secondary/20 hover:border-secondary h-full flex flex-col items-center text-center transition-all duration-300 shadow-[0_0_5px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_rgba(166,227,161,0.2)]">
         {/* Skill Icon */}
-        <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${getCategoryColor(category)} mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 ease-out`}>
-          <Icon className="w-8 h-8 text-white group-hover:scale-105 transition-transform duration-300 ease-out" />
+        <div className="mb-3 p-2 rounded-sm bg-secondary/5 border border-secondary/10 group-hover:bg-secondary/10 transition-colors">
+          <Icon className={`w-8 h-8 text-gray-400 group-hover:text-secondary transition-colors duration-300`} />
         </div>
 
         {/* Skill Name */}
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-accent transition-colors duration-300 ease-out">
+        <h3 className="text-sm font-bold text-white mb-2 group-hover:text-secondary transition-colors duration-300">
           {skill.name}
         </h3>
 
-        {/* Proficiency Level */}
-        <div className="w-full mb-3">
-          <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
-            <span>Proficiency</span>
-            <span>{skill.level}%</span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: `${skill.level}%` }}
-              transition={{ duration: 0.8, delay: index * 0.05 + 0.3, ease: "easeOut" }}
-              className={`h-2 rounded-full bg-gradient-to-r ${getCategoryColor(category)}`}
-            />
-          </div>
-        </div>
-
-        {/* Experience */}
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          {skill.experience}
-        </span>
-
-        {/* Hover effect */}
+        {/* Hover effect - Corner Brackets */}
         {isHovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute inset-0 bg-accent/5 rounded-xl pointer-events-none"
-          />
+          <>
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-secondary" />
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-secondary" />
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-secondary" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-secondary" />
+          </>
         )}
       </div>
     </motion.div>
   )
 }
 
-const CategorySection = ({ title, skills, icon: Icon, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.4, delay, ease: "easeOut" }}
-    className="mb-12"
-  >
-    <div className="flex items-center mb-8 group">
-      <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent/20 transition-colors duration-300 ease-out">
-        <Icon className="w-6 h-6 text-accent group-hover:scale-105 transition-transform duration-300 ease-out" />
-      </div>
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-accent transition-colors duration-300 ease-out">{title}</h3>
-    </div>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-      {skills.map((skill, index) => (
-        <SkillCard 
-          key={skill.name} 
-          skill={skill} 
-          index={index} 
-          category={title}
-        />
-      ))}
-    </div>
-  </motion.div>
-)
-
 const Skills = () => {
+  const [activeTab, setActiveTab] = useState('Languages')
+
   const skillCategories = {
     'Languages': [
-      { name: 'Java', level: 90, experience: '2+ years' },
-      { name: 'Python', level: 85, experience: '4+ years' },
-      { name: 'JavaScript', level: 85, experience: '4+ years' },
-      { name: 'TypeScript', level: 75, experience: '4+ years' },
-      { name: 'Kotlin', level: 60, experience: '2+ years' },
-      { name: 'SQL', level: 80, experience: '2+ years' },
+      { name: 'Java', level: 90 },
+      { name: 'Python', level: 90 },
+      { name: 'C', level: 70 },
+      { name: 'C++', level: 75 },
+      { name: 'C#', level: 70 },
+      { name: 'JavaScript', level: 85 },
+      { name: 'TypeScript', level: 80 },
+      { name: 'SQL', level: 80 },
+      { name: 'R', level: 60 },
+      { name: 'Kotlin', level: 60 },
+      { name: 'Bash', level: 75 },
     ],
-    'Frontend': [
-      { name: 'React', level: 90, experience: '3+ years' },
-      { name: 'Next.js', level: 70, experience: '6+ months' },
-      { name: 'Tailwind CSS', level: 85, experience: '3+ years' },
-      { name: 'Material UI', level: 80, experience: '3+ years' },
+    'Frameworks': [
+      { name: 'Spring Boot', level: 85 },
+      { name: 'React', level: 90 },
+      { name: 'Node.js', level: 80 },
+      { name: 'Express', level: 80 },
+      { name: 'Django', level: 80 },
+      { name: 'Flask', level: 75 },
+      { name: 'FastAPI', level: 75 },
+      { name: 'Next.js', level: 70 },
     ],
-    'Backend': [
-      { name: 'Spring Boot', level: 85, experience: '1+ years' },
-      { name: 'Django', level: 80, experience: '1+ years' },
-      { name: 'Node.js', level: 70, experience: '3+ years' },
-      { name: 'REST APIs', level: 85, experience: '3+ years' },
+    'ML / AI': [
+      { name: 'PyTorch', level: 80 },
+      { name: 'TensorFlow', level: 70 },
+      { name: 'Scikit-Learn', level: 85 },
+      { name: 'OpenCV', level: 65 },
+      { name: 'XGBoost', level: 85 },
+      { name: 'Pandas', level: 90 },
+      { name: 'NumPy', level: 90 },
     ],
-    'Database': [
-      { name: 'PostgreSQL', level: 80, experience: '1+ years' },
-      { name: 'MongoDB', level: 75, experience: '3+ years' },
-      { name: 'MySQL', level: 70, experience: '1+ years' },
+    'Cloud & DevOps': [
+      { name: 'AWS', level: 70 },
+      { name: 'GCP', level: 60 },
+      { name: 'Azure', level: 60 },
+      { name: 'Docker', level: 80 },
+      { name: 'Kubernetes', level: 65 },
+      { name: 'NGINX', level: 70 },
+      { name: 'Linux', level: 90 },
+      { name: 'Jenkins', level: 60 },
+      { name: 'TravisCI', level: 60 },
     ],
-    'DevOps': [
-      { name: 'Docker', level: 75, experience: '1+ years' },
-      { name: 'GitHub Actions', level: 80, experience: '1+ years' },
-      { name: 'AWS', level: 60, experience: '6+ months' },
-      { name: 'Linux', level: 75, experience: '2+ years' },
-    ],
-    'Security': [
-      { name: 'JWT', level: 85, experience: '1+ years' },
-      { name: 'OWASP', level: 70, experience: '1+ years' },
-      { name: 'RBAC', level: 80, experience: '1+ years' },
+    'Databases': [
+      { name: 'PostgreSQL', level: 85 },
+      { name: 'MySQL', level: 80 },
+      { name: 'MongoDB', level: 75 },
+      { name: 'Redis', level: 70 },
+      { name: 'Firebase', level: 75 },
+      { name: 'Supabase', level: 70 },
     ],
     'Tools': [
-      { name: 'Git', level: 90, experience: '3+ years' },
-      { name: 'GitHub', level: 90, experience: '3+ years' },
-      { name: 'Stripe', level: 80, experience: '6+ months' },
-      { name: 'SendGrid', level: 75, experience: '6+ months' },
+      { name: 'Git', level: 90 },
+      { name: 'GitHub', level: 90 },
+      { name: 'VS Code', level: 90 },
+      { name: 'IntelliJ IDEA', level: 85 },
+      { name: 'PyCharm', level: 85 },
+      { name: 'Neovim', level: 85 },
+      { name: 'Jupyter', level: 85 },
     ]
   }
 
-  const categoryIcons = {
-    'Languages': HiCode,
-    'Frontend': FaReact,
-    'Backend': SiSpringboot,
-    'Database': HiDatabase,
-    'DevOps': HiCloud,
-    'Security': HiShieldCheck,
-    'Tools': FaGitAlt
-  }
-
   return (
-    <section id="skills" className="py-20 bg-white dark:bg-dark-secondary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-10 bg-primary relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/5 to-transparent pointer-events-none" />
+
+      <div className="w-full px-[7%] relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 font-mono"
         >
-          <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-4">
-            Technical Expertise
+          <span className="inline-block px-4 py-2 bg-secondary/10 border border-secondary text-secondary rounded-sm text-sm font-bold mb-4 tracking-wider">
+            ./SKILLS_MATRIX
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Skills &{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent-dark">
-              Technologies
-            </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
+            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-600">Arsenal</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Proficient in modern development technologies with hands-on experience 
-            building real-world applications
-          </p>
         </motion.div>
 
-        {/* Skills Categories */}
-        <div className="space-y-16">
-          {Object.entries(skillCategories).map(([category, skills], index) => (
-            <CategorySection
+        {/* Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10 font-mono">
+          {Object.keys(skillCategories).map((category) => (
+            <button
               key={category}
-              title={category}
-              skills={skills}
-              icon={categoryIcons[category]}
-              delay={index * 0.1}
-            />
+              onClick={() => setActiveTab(category)}
+              className={`px-4 py-2 text-sm border transition-all duration-300 ${activeTab === category
+                ? 'bg-secondary text-black border-secondary font-bold shadow-[0_0_15px_rgba(166,227,161,0.4)]'
+                : 'bg-black/50 text-gray-500 border-gray-800 hover:border-secondary hover:text-secondary'
+                }`}
+            >
+              {category.toUpperCase()}
+            </button>
           ))}
+        </div>
+
+        {/* Skills Grid - Fixed Height Container to prevent jumpiness */}
+        <div className="min-h-[300px]">
+          <motion.div
+            layout
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"
+          >
+            <AnimatePresence mode='popLayout'>
+              {skillCategories[activeTab].map((skill, index) => (
+                <SkillCard key={skill.name} skill={skill} index={index} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
 
         {/* Call to Action */}
@@ -266,26 +260,14 @@ const Skills = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="text-center mt-20"
+          className="text-center mt-12 font-mono"
         >
-          <div className="bg-gradient-to-r from-accent/5 to-accent-light/5 dark:from-accent/10 dark:to-accent-light/10 rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Always Learning & Growing
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-              Technology is constantly evolving, and I'm committed to staying current with 
-              the latest trends, frameworks, and best practices in software development.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center px-8 py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-full transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              See My Work
-            </motion.button>
-          </div>
+          <button
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center px-8 py-3 bg-secondary text-black font-bold hover:bg-white transition-colors duration-300 shadow-[0_0_20px_rgba(166,227,161,0.2)]"
+          >
+            &gt; EXECUTE_PROJECT_VIEWER
+          </button>
         </motion.div>
       </div>
     </section>
