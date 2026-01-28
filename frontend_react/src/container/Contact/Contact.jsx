@@ -245,9 +245,10 @@ const Contact = () => {
                 Target Objectives:
               </h4>
               <ul className="text-gray-400 space-y-1 text-sm">
-                <li>&gt; Software Development Internships</li>
-                <li>&gt; Full-Stack Development Co-ops</li>
-                <li>&gt; Information Security Roles</li>
+                <li>&gt; Offensive Security Internships</li>
+                <li>&gt; Penetration Testing Co-ops</li>
+                <li>&gt; Red Teaming Roles</li>
+                <li>&gt; Security Research Collaborations</li>
                 <li>&gt; Open Source Collaborations</li>
               </ul>
             </motion.div>

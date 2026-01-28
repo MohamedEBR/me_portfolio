@@ -19,7 +19,7 @@ import {
 import { BiTerminal, BiBrain } from 'react-icons/bi'
 import { TbMathFunction, TbCpu } from 'react-icons/tb'
 
-const SkillCard = ({ skill, index }) => {
+const SkillCard = React.forwardRef(({ skill, index }, ref) => {
   const [isHovered, setIsHovered] = useState(false)
 
   const getIcon = (name) => {
@@ -103,6 +103,7 @@ const SkillCard = ({ skill, index }) => {
   return (
     <motion.div
       layout
+      ref={ref}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
@@ -134,7 +135,7 @@ const SkillCard = ({ skill, index }) => {
       </div>
     </motion.div>
   )
-}
+})
 
 const Skills = () => {
   const [activeTab, setActiveTab] = useState('Languages')

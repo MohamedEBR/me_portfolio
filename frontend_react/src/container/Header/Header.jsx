@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
 import { HiDownload, HiMail, HiTerminal } from 'react-icons/hi'
 import { BsGithub, BsLinkedin } from 'react-icons/bs'
+import { doc, getDoc, setDoc, updateDoc, increment, onSnapshot } from 'firebase/firestore'
 import OptimizedImage from '../../components/OptimizedImage'
 import MatrixRain from '../../components/MatrixRain'
 import { useDarkMode } from '../../hooks'
 import { images } from '../../constants'
 import resumePdf from '../../assets/ME_Resume.pdf'
+import { db } from '../../lib/firebase'
 
 const TerminalLine = ({ text, delay = 0, className = "" }) => (
   <motion.div
@@ -40,6 +42,68 @@ const SocialLink = ({ href, icon: Icon, label, delay = 0 }) => (
 
 const Header = () => {
   const [isDarkMode] = useDarkMode()
+  const [flagInput, setFlagInput] = useState('')
+  const [score, setScore] = useState(0)
+  const [showToast, setShowToast] = useState('')
+
+  useEffect(() => {
+    const docRef = doc(db, "game_stats", "ctf")
+    const unsubscribe = onSnapshot(docRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          setScore(docSnap.data().captures || 127)
+        } else {
+          setScore(127)
+        }
+      },
+      (error) => {
+        console.error("FIREBASE ERROR:", error.code, error.message)
+        if (error.code === 'permission-denied') {
+          console.warn("Check your Firestore Rules! They must be set to 'allow read, write: if true;' for this demo.")
+        }
+        console.warn("Real-time listener failed, using local fallback.", error)
+        const saved = localStorage.getItem('ctf_score')
+        setScore(saved ? parseInt(saved) : 127)
+      }
+    )
+
+    return () => unsubscribe()
+  }, [])
+
+  const checkFlag = async () => {
+    if (flagInput.trim() === 'EBR{yOu_FoUNd_mE!!}') {
+      // Optimistic update
+      const newScore = score + 1
+      setScore(newScore)
+      localStorage.setItem('ctf_score', newScore)
+      setFlagInput('')
+      setShowToast('SYSTEM BREACHED! Flag Captured. +1')
+      setTimeout(() => setShowToast(''), 3000)
+
+      try {
+        const docRef = doc(db, "game_stats", "ctf")
+        await updateDoc(docRef, {
+          captures: increment(1)
+        }).catch(async (err) => {
+          if (err.code === 'not-found') {
+            await setDoc(docRef, { captures: 128 })
+          }
+        })
+      } catch (err) {
+        // Silent fail on network
+      }
+
+    } else {
+      setShowToast('ACCESS DENIED. Invalid Flag.')
+      setTimeout(() => setShowToast(''), 2000)
+    }
+  }
+
+  const handleCopyFlag = () => {
+    navigator.clipboard.writeText('EBR{yOu_FoUNd_mE!!}')
+    setShowToast('SECRET DATA COPIED TO CLIPBOARD...')
+    setTimeout(() => setShowToast(''), 2000)
+  }
 
   return (
     <section
@@ -52,7 +116,7 @@ const Header = () => {
 
       {/* Scanline Overlay is global in CSS now, but we can add extra specific ones if needed */}
 
-      <div className="relative z-20 w-full px-[7%] py-12 min-h-screen flex items-center justify-center font-mono">
+      <div className="relative z-20 w-full px-[7%] py-12 min-h-screen flex items-center justify-center flex-col font-mono">
 
         {/* Unified Terminal Window */}
         <div className="w-full bg-black/90 border border-secondary/30 rounded-lg shadow-[0_0_50px_rgba(166,227,161,0.15)] backdrop-blur-md overflow-hidden relative">
@@ -65,7 +129,13 @@ const Header = () => {
               <div className="w-3 h-3 rounded-full bg-[#a6e3a1]" />
               <span className="ml-4 text-[#a6adc8] text-sm">root@archlinux:~</span>
             </div>
-            <div className="text-[#a6adc8] text-xs">zsh</div>
+            <div
+              onClick={handleCopyFlag}
+              className="text-[#a6adc8] text-xs cursor-pointer hover:text-white hover:scale-105 transition-all active:text-secondary select-none"
+              title="zsh process - PID: ???"
+            >
+              zsh
+            </div>
           </div>
 
           {/* Terminal Content */}
@@ -196,8 +266,9 @@ const Header = () => {
                   <TypeAnimation
                     sequence={[
                       'Full-Stack Developer', 2000,
-                      'Security Researcher', 2000,
-                      'Open Source Contributor', 2000,
+                      'Offensive Security', 2000,
+                      'Reverse Engineering', 2000,
+                      'I use Arch and Nvim btw.', 2000,
                     ]}
                     wrapper="span"
                     speed={50}
@@ -211,8 +282,8 @@ const Header = () => {
                   transition={{ delay: 2.2 }}
                   className="text-gray-400 max-w-xl text-lg leading-relaxed"
                 >
-                  Building resilient systems and exploring the depths of cybersecurity.
-                  Currently focusing on secure architecture and offensive security.
+                  Specializing in offensive security, vulnerability research, and penetration testing.
+                  Currently seeking opportunities to break, bypass, and eventually secure systems.
                 </motion.p>
               </div>
 
@@ -242,24 +313,23 @@ const Header = () => {
 
             {/* Right Column: Visuals (Profile) */}
             <div className="relative flex justify-center items-center h-full min-h-[500px]">
-              {/* Spinning/Cyber Elements */}
-              <div className="relative w-72 h-72 sm:w-96 sm:h-96">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 border border-secondary/20 rounded-full border-dashed"
-                />
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-4 border border-secondary/40 rounded-full"
-                />
-                <div className="absolute inset-8 rounded-full overflow-hidden border-2 border-secondary/50 shadow-[0_0_30px_rgba(166,227,161,0.2)] bg-black">
+              {/* Tech Bracket Container */}
+              <div className="relative w-full aspect-[4/5] max-w-[450px]">
+                {/* Decorative Brackets */}
+                <div className="absolute -top-4 -left-4 border-t-2 border-l-2 border-secondary/50 w-12 h-12" />
+                <div className="absolute -top-4 -right-4 border-t-2 border-r-2 border-secondary/50 w-12 h-12" />
+                <div className="absolute -bottom-4 -left-4 border-b-2 border-l-2 border-secondary/50 w-12 h-12" />
+                <div className="absolute -bottom-4 -right-4 border-b-2 border-r-2 border-secondary/50 w-12 h-12" />
+
+                <div className="w-full h-full overflow-hidden border border-secondary/30 shadow-[0_0_30px_rgba(166,227,161,0.1)] bg-black relative rounded-sm">
                   <OptimizedImage
                     src={images.profile}
                     alt="Profile"
-                    className="w-full h-full object-cover opacity-90 transition-all hover:scale-105 hover:opacity-100"
+                    className="w-full h-full opacity-90 transition-all hover:scale-105 hover:opacity-100"
+                    style={{ objectPosition: 'center 15%' }}
                   />
+                  {/* Digital overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 </div>
               </div>
             </div>
@@ -280,6 +350,53 @@ const Header = () => {
             </div>
           </div>
         </div>
+
+        {/* CTF Game Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3 }}
+          className="mt-8 w-full max-w-lg mx-auto font-mono"
+        >
+          <div className="flex flex-col sm:flex-row items-center gap-4 bg-black/80 border border-secondary/30 p-2 sm:p-4 rounded-sm backdrop-blur-md shadow-[0_0_20px_rgba(0,255,65,0.1)]">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <span className="text-xl">🚩</span>
+              <span className="text-xs text-gray-400 uppercase tracking-widest whitespace-nowrap">
+                CTF_Module
+              </span>
+            </div>
+
+            <div className="flex-1 w-full flex items-center gap-2 bg-black/50 border border-secondary/20 rounded px-3 py-2 focus-within:border-secondary transition-colors">
+              <span className="text-secondary font-bold">&gt;</span>
+              <input
+                type="text"
+                value={flagInput}
+                onChange={(e) => setFlagInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && checkFlag()}
+                placeholder="Enter valid flag string..."
+                className="bg-transparent border-none outline-none text-white text-sm w-full placeholder-gray-700 font-mono"
+              />
+            </div>
+
+            <div className="flex items-center gap-2 px-2 border-l border-gray-800">
+              <div className="flex flex-col items-end">
+                <span className="text-[10px] text-gray-500 uppercase">Captures</span>
+                <span className="text-lg font-bold text-secondary leading-none">{score}</span>
+              </div>
+            </div>
+          </div>
+          {/* Success Message */}
+          {showToast && (
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="text-center mt-2 text-xs text-secondary font-bold"
+            >
+              {showToast}
+            </motion.div>
+          )}
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
