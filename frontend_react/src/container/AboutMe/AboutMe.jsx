@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { HiTerminal, HiChip, HiLightningBolt } from 'react-icons/hi'
+import { HiTerminal, HiChip, HiShieldCheck } from 'react-icons/hi'
 import { BsGithub } from 'react-icons/bs'
 import { formatDistanceToNow } from 'date-fns'
 import { GitHubCalendar } from 'react-github-calendar'
@@ -62,7 +62,7 @@ const AboutMe = () => {
   }, [])
 
   const stats = [
-    { label: 'MERGED_PRS_AT_SHOPIFY', value: '49+', icon: HiLightningBolt },
+    { label: 'VERIFIED_MTLS_REQUESTS', value: '500+', icon: HiShieldCheck },
     { label: 'PUBLIC_SECURITY_SYSTEMS', value: '3', icon: HiChip },
     // { label: 'STACK', value: '10+', icon: HiTerminal },
   ]
@@ -120,7 +120,7 @@ const AboutMe = () => {
                   <span className="text-secondary mr-2">&gt;</span> Background & Focus
                 </h3>
                 <p>
-                  I’m an Information Security Specialist and Mathematics Major at the University of Toronto Mississauga. I currently work on Shopify&apos;s IAM and Trust team, where I ship production identity, credential-lifecycle, PKI, and authorization work across Ruby, Go, and infrastructure code.
+                  I’m an Information Security Specialist and Mathematics Major at the University of Toronto Mississauga. I currently work in Identity &amp; Access Management within Shopify&apos;s Trust (Security) organization, where I ship production identity, credential-lifecycle, PKI, and authorization work across Ruby, Go, and infrastructure code.
                 </p>
               </div>
 

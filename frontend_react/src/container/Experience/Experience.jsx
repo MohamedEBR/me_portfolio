@@ -128,15 +128,15 @@ const Experience = () => {
 
   const workExperience = [
     {
-      role: "Software Engineering Intern — IAM / Trust",
+      role: "Software Engineering Intern — Identity & Access Management",
       company: "Shopify",
       period: "May 2026 - Present",
       location: "Remote, Canada",
-      description: "Shipping production identity and access-management systems for credential lifecycle, device trust, PKI, workload identity, and authorization.",
+      description: "Working within Shopify's Trust (Security) organization to ship production identity and access-management systems for credential lifecycle, device trust, PKI, workload identity, and authorization.",
       achievements: [
-        "Shipped 49 merged pull requests across 10+ repositories in Ruby on Rails, Go, Terraform, and internal security infrastructure.",
-        "Built auditable short-lived credential flows with token lifecycle and revocation metadata while keeping credential material out of audit records.",
-        "Implemented hardware-backed credential storage and Linux TPM device identity, including certificate refresh and certificate/key verification.",
+        "Helped deliver TPM-backed Linux authentication across 7 distributions, supporting 500+ verified mTLS requests at over 99% success.",
+        "Built audit infrastructure for hundreds of short-lived credential operations, reaching 100% request, device-binding, and expiration metadata coverage with atomic audit recording.",
+        "Consolidated two access-management services into one, validated critical workflows end to end, and removed the dominant source of noisy server-error signals.",
         "Found and fixed two authorization vulnerabilities in the first week and authored a workload-identity design using mTLS and audience-bound short-lived tokens."
       ],
       technologies: ["Ruby on Rails", "Go", "Terraform", "PKI / X.509", "TPM", "mTLS", "OAuth", "GCP"]

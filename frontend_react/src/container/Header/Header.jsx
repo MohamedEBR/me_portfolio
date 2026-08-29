@@ -279,8 +279,9 @@ const Header = () => {
                   transition={{ delay: 2.2 }}
                   className="text-gray-400 max-w-xl text-lg leading-relaxed"
                 >
-                  Software Engineering Intern on Shopify&apos;s IAM and Trust team, building
-                  security-sensitive identity, credential, and authorization systems. I also
+                  Software Engineering Intern in Identity &amp; Access Management within Shopify&apos;s
+                  Trust (Security) organization, building security-sensitive identity, credential,
+                  and authorization systems. I also
                   build public workload-identity and detection-engineering platforms.
                 </motion.p>
               </div>
