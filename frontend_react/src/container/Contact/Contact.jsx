@@ -245,10 +245,10 @@ const Contact = () => {
                 Target Objectives:
               </h4>
               <ul className="text-gray-400 space-y-1 text-sm">
-                <li>&gt; Offensive Security Internships</li>
-                <li>&gt; Penetration Testing Co-ops</li>
-                <li>&gt; Red Teaming Roles</li>
-                <li>&gt; Security Research Collaborations</li>
+                <li>&gt; Winter 2027 Security Engineering Internships</li>
+                <li>&gt; Identity & Security Infrastructure</li>
+                <li>&gt; Cloud Detection & Security Data Platforms</li>
+                <li>&gt; Product, Application & AI Security</li>
                 <li>&gt; Open Source Collaborations</li>
               </ul>
             </motion.div>
@@ -318,7 +318,7 @@ const Contact = () => {
                   placeholder="ENTER_NAME"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.name}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono">{'// ERROR: '}{errors.name}</p>
                 )}
               </div>
 
@@ -340,7 +340,7 @@ const Contact = () => {
                   placeholder="ENTER_EMAIL"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.email}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono">{'// ERROR: '}{errors.email}</p>
                 )}
               </div>
 
@@ -362,7 +362,7 @@ const Contact = () => {
                   placeholder="ENTER_SUBJECT"
                 />
                 {errors.subject && (
-                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.subject}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono">{'// ERROR: '}{errors.subject}</p>
                 )}
               </div>
 
@@ -384,7 +384,7 @@ const Contact = () => {
                   placeholder="ENTER_MESSAGE_CONTENT..."
                 />
                 {errors.message && (
-                  <p className="mt-1 text-sm text-red-500 font-mono"> // ERROR: {errors.message}</p>
+                  <p className="mt-1 text-sm text-red-500 font-mono">{'// ERROR: '}{errors.message}</p>
                 )}
               </div>
 

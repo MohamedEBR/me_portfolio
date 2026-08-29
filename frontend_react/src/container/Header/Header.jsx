@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { HiDownload, HiMail, HiTerminal } from 'react-icons/hi'
 import { BsGithub, BsLinkedin } from 'react-icons/bs'
-import { doc, getDoc, setDoc, updateDoc, increment, onSnapshot } from 'firebase/firestore'
+import { doc, setDoc, updateDoc, increment, onSnapshot } from 'firebase/firestore'
 import OptimizedImage from '../../components/OptimizedImage'
 import MatrixRain from '../../components/MatrixRain'
-import { useDarkMode } from '../../hooks'
 import { images } from '../../constants'
-import resumePdf from '../../assets/ME_Resume.pdf'
 import { db } from '../../lib/firebase'
 
 const TerminalLine = ({ text, delay = 0, className = "" }) => (
@@ -41,7 +38,6 @@ const SocialLink = ({ href, icon: Icon, label, delay = 0 }) => (
 )
 
 const Header = () => {
-  const [isDarkMode] = useDarkMode()
   const [flagInput, setFlagInput] = useState('')
   const [score, setScore] = useState(0)
   const [showToast, setShowToast] = useState('')
@@ -145,7 +141,7 @@ const Header = () => {
             <div className="space-y-6">
               <div className="space-y-2 text-gray-300 font-mono text-sm sm:text-base">
                 <TerminalLine text="initializing secure session..." delay={0.2} />
-                <TerminalLine text="loading modules: [react, node, security]..." delay={0.4} />
+                <TerminalLine text="loading modules: [iam, pki, detection]..." delay={0.4} />
                 <TerminalLine text="connected to portfolio_v2.0" delay={0.6} className="text-secondary" />
               </div>
 
@@ -265,9 +261,10 @@ const Header = () => {
                 <div className="text-xl sm:text-2xl text-secondary font-bold h-8 mb-6">
                   <TypeAnimation
                     sequence={[
-                      'Full-Stack Developer', 2000,
-                      'Offensive Security', 2000,
-                      'Reverse Engineering', 2000,
+                      'Security Engineering', 2000,
+                      'Identity & Access Management', 2000,
+                      'Detection Engineering', 2000,
+                      'Cloud & Platform Security', 2000,
                       'I use Arch and Nvim btw.', 2000,
                     ]}
                     wrapper="span"
@@ -282,8 +279,9 @@ const Header = () => {
                   transition={{ delay: 2.2 }}
                   className="text-gray-400 max-w-xl text-lg leading-relaxed"
                 >
-                  Specializing in offensive security, vulnerability research, and penetration testing.
-                  Currently seeking opportunities to break, bypass, and eventually secure systems.
+                  Software Engineering Intern on Shopify&apos;s IAM and Trust team, building
+                  security-sensitive identity, credential, and authorization systems. I also
+                  build public workload-identity and detection-engineering platforms.
                 </motion.p>
               </div>
 
@@ -300,9 +298,12 @@ const Header = () => {
                 >
                   ./contact.sh
                 </button>
-                <a href={resumePdf} target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-gray-600 text-gray-300 hover:border-white hover:text-white transition-all">
-                  cat resume.pdf
-                </a>
+                <button
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-6 py-3 border border-gray-600 text-gray-300 hover:border-white hover:text-white transition-all"
+                >
+                  ls ./projects
+                </button>
 
                 <div className="flex items-center gap-4 ml-2">
                   <SocialLink href="https://github.com/MohamedEBR" icon={BsGithub} label="GitHub" />

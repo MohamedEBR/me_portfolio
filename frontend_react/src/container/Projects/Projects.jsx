@@ -1,66 +1,81 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { HiCode, HiExternalLink, HiLockClosed, HiTerminal } from 'react-icons/hi'
+import { motion } from 'framer-motion'
+import { HiCode, HiExternalLink, HiLockClosed } from 'react-icons/hi'
 import { BsGithub } from 'react-icons/bs'
 import { FaReact, FaJava, FaPython, FaDocker, FaNodeJs } from 'react-icons/fa'
 import { SiSpringboot, SiDjango, SiStripe, SiPostgresql, SiMongodb, SiTailwindcss, SiTypescript, SiMui, SiExpress, SiOpenai, SiFastapi, SiPytorch, SiRedis, SiScikitlearn, SiGnubash, SiC, SiLinux } from 'react-icons/si'
 import OptimizedImage from '../../components/OptimizedImage'
 import panaceaImg from '../../assets/panacea.png'
-import discoverImg from '../../assets/discover.png'
-import chatbotImg from '../../assets/chatbot.png'
 import automlImg from '../../assets/automl.png'
 import picoFlagImg from '../../assets/picoctf_flag.png'
 import networkSecurityImg from '../../assets/network_security.png'
 import myShellImg from '../../assets/myshell.png'
+import aegisImg from '../../assets/aegis.svg'
+import signalForgeImg from '../../assets/signalforge.svg'
 
 const projects = [
   {
     id: 0,
+    title: "Aegis",
+    category: "Security",
+    description: "A Go workload-identity and authorization control plane that exchanges verified mTLS identity for short-lived, audience-bound credentials with explainable ReBAC decisions.",
+    image: aegisImg,
+    features: [
+      "SPIFFE Identity over mTLS",
+      "Explainable ReBAC",
+      "Tamper-Evident Audit Chain"
+    ],
+    technologies: ["Go", "PostgreSQL", "Docker", "Kubernetes", "Prometheus", "JWT"],
+    liveLink: null,
+    githubLink: "https://github.com/MohamedEBR/aegis-control-plane"
+  },
+  {
+    id: 1,
+    title: "SignalForge",
+    category: "Security",
+    description: "A detection-as-code and replay lab that normalizes cloud, identity, workload, application, and network telemetry into explainable, evidence-backed incidents.",
+    image: signalForgeImg,
+    features: [
+      "Five Telemetry Adapters",
+      "Versioned ATT&CK Rules",
+      "126K Events/Second"
+    ],
+    technologies: ["Python", "Pydantic", "Docker", "GitHub Actions", "AWS", "Azure"],
+    liveLink: null,
+    githubLink: "https://github.com/MohamedEBR/signalforge"
+  },
+  {
+    id: 2,
+    title: "SentinelFlow",
+    category: "Security",
+    description: "An end-to-end network intrusion-detection pipeline with Zeek/Argus ingestion, deployable feature contracts, explainable alerts, and hardened model artifacts.",
+    image: networkSecurityImg,
+    features: [
+      "0.987 PR AUC",
+      "Zeek / PCAP Ingestion",
+      "Explainable Detection API"
+    ],
+    technologies: ["Python", "XGBoost", "PyTorch", "Zeek", "Scikit-Learn", "Pydantic"],
+    liveLink: null,
+    githubLink: "https://github.com/MohamedEBR/network_intrusion_detection"
+  },
+  {
+    id: 3,
     title: "AutoML",
     category: "Full-Stack",
-    description: "Autonomous Agentic System where specialized AI agents collaborate to build, train, and deploy ML models. Features a chat-first interface, Chain-of-Thought reasoning, and real-time training visualization.",
+    description: "A multi-agent ML platform where specialized agents collaborate to prepare data, train models, and surface experiment progress through a chat-first interface.",
     image: automlImg,
     features: [
       "Agentic Orchestration",
-      "Real-time Training Viz",
-      "Chain-of-Thought Reasoning"
+      "Real-Time Training Views",
+      "Typed ML Workflows"
     ],
     technologies: ["React", "TypeScript", "FastAPI", "PyTorch", "OpenAI", "Redis"],
     liveLink: null,
     githubLink: "https://github.com/FriedricNietzsche/AutoML"
   },
   {
-    id: 1,
-    title: "picoCTF Writeups",
-    category: "Exploits",
-    description: "A personal repository documenting my learning process through picoCTF challenges. Contains detailed writeups and solutions to track progress in cryptography and exploitation.",
-    image: picoFlagImg,
-    features: [
-      "Detailed Walkthroughs",
-      "Exploit Scripts",
-      "CTF Skill Tracking"
-    ],
-    technologies: ["Python", "Bash", "C", "Cryptography", "Reverse Engineering"],
-    liveLink: null,
-    githubLink: "https://github.com/MohamedEBR/picoCTF"
-  },
-  {
-    id: 2,
-    title: "AI SaaS Chatbot",
-    category: "Full-Stack",
-    description: "Full-stack MERN AI chatbot with secure authentication (HTTP-only cookies), per-user persistent chat history, and OpenAI GPT-3.5 integration.",
-    image: chatbotImg,
-    features: [
-      "Secure Auth (HTTP-only Cookies)",
-      "Persistent Chat History",
-      "OpenAI Integration"
-    ],
-    technologies: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Material UI", "OpenAI"],
-    liveLink: "https://ai-mern-chatbot.netlify.app",
-    githubLink: "https://github.com/MohamedEBR/AI-SaaS-Chat-Bot"
-  },
-  {
-    id: 3,
+    id: 4,
     title: "Karate Club Management",
     category: "Full-Stack",
     description: "Secure management system for martial arts academy. Implemented RBAC, payment gateways, and automated alert systems.",
@@ -75,39 +90,24 @@ const projects = [
     githubLink: "https://github.com/MohamedEBR/panacea-2.0"
   },
   {
-    id: 4,
-    title: "DiscoverMyUni",
-    category: "Full-Stack",
-    description: "Built and deployed content ingestion pipelines for a student platform serving 500+ users. Improved event extraction accuracy to 85% via ML-assisted parsing.",
-    image: discoverImg,
-    features: [
-      "ML-Assisted Parsing",
-      "Content Ingestion Pipelines",
-      "Agile Delivery"
-    ],
-    technologies: ["Django", "Python", "React", "Machine Learning", "Scikit-Learn"],
-    githubLink: "https://github.com/discovermyuni/discovermyuni.org"
-  },
-  {
     id: 5,
-    title: "Network Intrusion Detection",
-    category: "Exploits",
-    description: "End-to-end supervised learning pipeline for flow-based intrusion detection on UNSW NB15 dataset. Achieved 0.987 PR AUC and 0.983 ROC AUC.",
-    image: networkSecurityImg,
+    title: "picoCTF Writeups",
+    category: "Security",
+    description: "Documented challenge solutions and exploit scripts spanning cryptography, binary exploitation, reverse engineering, and web security.",
+    image: picoFlagImg,
     features: [
-      "XGBoost Binary Detection",
-      "Pydantic Feature Contracts",
-      "Zeek/Argus Log Ingestion"
+      "Reproducible Walkthroughs",
+      "Exploit Scripts",
+      "Security Fundamentals"
     ],
-    technologies: [
-      "Python", "XGBoost", "PyTorch", "Zeek", "Argus", "Scikit-Learn", "Pydantic"
-    ],
-    githubLink: "https://github.com/MohamedEBR"
+    technologies: ["Python", "Bash", "C", "Cryptography", "Reverse Engineering"],
+    liveLink: null,
+    githubLink: "https://github.com/MohamedEBR/picoCTF"
   },
   {
     id: 6,
     title: "MyShell",
-    category: "Tools",
+    category: "Systems",
     description: "A custom Unix-like shell implementation in C. Supporting process creation (fork/exec), signal handling, and I/O redirection.",
     image: myShellImg,
     features: [
@@ -289,7 +289,7 @@ const ProjectCard = ({ project, index }) => {
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All')
-  const filters = ['All', 'Full-Stack', 'Tools', 'Exploits']
+  const filters = ['All', 'Security', 'Full-Stack', 'Systems']
 
   const filteredProjects = React.useMemo(() => projects.filter(project =>
     activeFilter === 'All' || project.category === activeFilter
@@ -310,13 +310,13 @@ const Projects = () => {
           className="text-center mb-16 font-mono"
         >
           <span className="inline-block px-4 py-2 bg-secondary/10 border border-secondary text-secondary rounded-sm text-sm font-bold mb-4 tracking-wider">
-            ./EXPLOITS
+            ./PROJECTS
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
-            Exploits & <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-600">Tools</span>
+            Security Systems & <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-600">Selected Work</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto border-l-2 border-secondary/50 pl-4 text-left md:text-center md:border-l-0 md:pl-0">
-            &gt; Selected Works & Deployed Systems
+            &gt; Public, testable systems backed by measured evidence.
           </p>
         </motion.div>
 

@@ -1,46 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { HiTerminal, HiChip, HiLightningBolt, HiShieldCheck, HiCode } from 'react-icons/hi'
+import { HiTerminal, HiChip, HiLightningBolt } from 'react-icons/hi'
 import { BsGithub } from 'react-icons/bs'
 import { formatDistanceToNow } from 'date-fns'
 import { GitHubCalendar } from 'react-github-calendar'
 import { images } from '../../constants'
 
-const AboutCard = ({ icon: Icon, title, description, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.4, delay, ease: "easeOut" }}
-    whileHover={{ y: -3, scale: 1.01, transition: { duration: 0.3, ease: 'easeOut' } }}
-    className="bg-black/80 rounded-sm p-6 shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_rgba(0,255,65,0.2)] transition-all duration-300 ease-out border border-secondary/20 hover:border-secondary group font-mono"
-  >
-    <div className="flex items-center mb-4">
-      <div className="w-12 h-12 bg-secondary/10 rounded-sm flex items-center justify-center mr-4 group-hover:bg-secondary/20 transition-colors duration-300 ease-out border border-secondary/20">
-        <Icon className="w-6 h-6 text-secondary group-hover:scale-105 transition-transform duration-300 ease-out" />
-      </div>
-      <h3 className="text-xl font-bold text-white group-hover:text-secondary transition-colors duration-300 ease-out">{title}</h3>
-    </div>
-    <p className="text-gray-400 group-hover:text-gray-300 leading-relaxed text-sm">{description}</p>
-  </motion.div>
-)
-
-const StatCard = ({ number, label, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.5 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.6, delay }}
-    className="text-center font-mono"
-  >
-    <div className="text-3xl md:text-4xl font-bold text-secondary mb-2 text-glow">{number}</div>
-    <div className="text-sm text-gray-500 uppercase tracking-widest">{label}</div>
-  </motion.div>
-)
-
 const AboutMe = () => {
   const [text, setText] = useState('')
-  const fullText = "> CS student focused on secure engineering, offensive security, and full-stack systems. (And yes, I use Arch btw)"
+  const fullText = "> Security engineer focused on identity, authorization, cloud detection, and dependable platform systems. (And yes, I use Arch btw)"
   const [gitData, setGitData] = useState({ events: [], loading: true })
 
   useEffect(() => {
@@ -94,8 +62,8 @@ const AboutMe = () => {
   }, [])
 
   const stats = [
-    { label: 'YRS_EXP', value: '4+', icon: HiLightningBolt },
-    { label: 'PROJECTS', value: '15+', icon: HiChip },
+    { label: 'MERGED_PRS_AT_SHOPIFY', value: '49+', icon: HiLightningBolt },
+    { label: 'PUBLIC_SECURITY_SYSTEMS', value: '3', icon: HiChip },
     // { label: 'STACK', value: '10+', icon: HiTerminal },
   ]
 
@@ -152,7 +120,7 @@ const AboutMe = () => {
                   <span className="text-secondary mr-2">&gt;</span> Background & Focus
                 </h3>
                 <p>
-                  I’m a Computer Science student at the University of Toronto Mississauga with a strong foundation in software engineering and a growing focus on cybersecurity, CTFs, and offensive security. My background spans full-stack development, where I’ve built systems that combine solid backend engineering with intuitive, user-focused frontend design.
+                  I’m an Information Security Specialist and Mathematics Major at the University of Toronto Mississauga. I currently work on Shopify&apos;s IAM and Trust team, where I ship production identity, credential-lifecycle, PKI, and authorization work across Ruby, Go, and infrastructure code.
                 </p>
               </div>
 
@@ -161,7 +129,7 @@ const AboutMe = () => {
                   <span className="text-secondary mr-2">&gt;</span> Engineering Philosophy
                 </h3>
                 <p>
-                  I’m particularly interested in secure software engineering, systems-level thinking, and understanding how software breaks as much as how it’s built. I enjoy working in collaborative environments, learning from others, and continuously pushing my technical boundaries through projects.
+                  I care about security controls that are practical to operate: short-lived credentials, explainable authorization, durable audit evidence, tested detections, and safe failure modes. My public projects turn those principles into inspectable systems without relying on proprietary code or data.
                 </p>
               </div>
 
@@ -301,7 +269,7 @@ const AboutMe = () => {
                 <span className="text-secondary mr-2">&gt;</span> Athletic Discipline
               </h3>
               <p className="text-gray-400 text-xs leading-relaxed">
-                Competitive karate athlete, 2x national gold medalist. Competing at 2026 Nationals.
+                Competitive karate athlete and two-time national gold medalist. The discipline carries directly into how I train, debug, and ship.
               </p>
             </div>
           </motion.div>

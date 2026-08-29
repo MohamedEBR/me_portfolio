@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { HiCode, HiDatabase, HiCloud, HiShieldCheck, HiMail, HiTerminal } from 'react-icons/hi'
+import { HiCode, HiDatabase, HiCloud, HiShieldCheck } from 'react-icons/hi'
 import {
   FaReact, FaJava, FaPython, FaJsSquare, FaGitAlt, FaDocker, FaAws,
   FaLinux, FaCode, FaMicrochip, FaDatabase, FaServer, FaTerminal,
@@ -16,7 +16,6 @@ import {
   SiVisualstudiocode, SiIntellijidea, SiPycharm, SiJupyter,
   SiCsharp, SiPytorch, SiTensorflow, SiScikitlearn
 } from 'react-icons/si'
-import { BiTerminal, BiBrain } from 'react-icons/bi'
 import { TbMathFunction, TbCpu } from 'react-icons/tb'
 
 const SkillCard = React.forwardRef(({ skill, index }, ref) => {
@@ -36,6 +35,8 @@ const SkillCard = React.forwardRef(({ skill, index }, ref) => {
       'R': SiR,
       'Kotlin': SiKotlin,
       'Bash': SiGnubash,
+      'Go': FaCode,
+      'Ruby': FaCode,
 
       // Frameworks
       'Spring Boot': SiSpringboot,
@@ -83,6 +84,14 @@ const SkillCard = React.forwardRef(({ skill, index }, ref) => {
       'JWT': SiJsonwebtokens,
       'OWASP': HiShieldCheck,
       'RBAC': HiShieldCheck,
+      'PKI / X.509': HiShieldCheck,
+      'mTLS': HiShieldCheck,
+      'OAuth / OIDC': HiShieldCheck,
+      'SPIFFE': HiShieldCheck,
+      'ReBAC': HiShieldCheck,
+      'TPM': FaMicrochip,
+      'Detection Engineering': HiShieldCheck,
+      'Threat Modeling': HiShieldCheck,
 
       // Tools
       'Git': FaGitAlt,
@@ -93,6 +102,8 @@ const SkillCard = React.forwardRef(({ skill, index }, ref) => {
       'Neovim': SiNeovim,
       'Jupyter': SiJupyter,
       'Terminal': FaTerminal,
+      'Terraform': HiCloud,
+      'Prometheus': HiCloud,
     }
     const IconComponent = icons[name] || HiCode
     return IconComponent
@@ -142,17 +153,32 @@ const Skills = () => {
 
   const skillCategories = {
     'Languages': [
-      { name: 'Java', level: 90 },
+      { name: 'Go', level: 85 },
+      { name: 'Ruby', level: 80 },
       { name: 'Python', level: 90 },
+      { name: 'TypeScript', level: 85 },
+      { name: 'SQL', level: 85 },
+      { name: 'Bash', level: 80 },
+      { name: 'Java', level: 85 },
       { name: 'C', level: 70 },
       { name: 'C++', level: 75 },
       { name: 'C#', level: 70 },
       { name: 'JavaScript', level: 85 },
-      { name: 'TypeScript', level: 80 },
-      { name: 'SQL', level: 80 },
       { name: 'R', level: 60 },
       { name: 'Kotlin', level: 60 },
-      { name: 'Bash', level: 75 },
+    ],
+    'Security & Identity': [
+      { name: 'PKI / X.509', level: 90 },
+      { name: 'mTLS', level: 90 },
+      { name: 'OAuth / OIDC', level: 85 },
+      { name: 'SPIFFE', level: 85 },
+      { name: 'ReBAC', level: 85 },
+      { name: 'TPM', level: 80 },
+      { name: 'Detection Engineering', level: 90 },
+      { name: 'Threat Modeling', level: 85 },
+      { name: 'JWT', level: 90 },
+      { name: 'RBAC', level: 90 },
+      { name: 'OWASP', level: 85 },
     ],
     'Frameworks': [
       { name: 'Spring Boot', level: 85 },
@@ -174,15 +200,16 @@ const Skills = () => {
       { name: 'NumPy', level: 90 },
     ],
     'Cloud & DevOps': [
-      { name: 'AWS', level: 70 },
-      { name: 'GCP', level: 60 },
+      { name: 'GCP', level: 80 },
+      { name: 'AWS', level: 80 },
       { name: 'Azure', level: 60 },
+      { name: 'Terraform', level: 80 },
       { name: 'Docker', level: 80 },
-      { name: 'Kubernetes', level: 65 },
+      { name: 'Kubernetes', level: 75 },
+      { name: 'Prometheus', level: 70 },
+      { name: 'GitHub Actions', level: 85 },
       { name: 'NGINX', level: 70 },
       { name: 'Linux', level: 90 },
-      { name: 'Jenkins', level: 60 },
-      { name: 'TravisCI', level: 60 },
     ],
     'Databases': [
       { name: 'PostgreSQL', level: 85 },

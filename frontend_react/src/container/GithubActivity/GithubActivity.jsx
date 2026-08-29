@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { GitHubCalendar } from 'react-github-calendar'
 import { motion } from 'framer-motion'
-import { HiCode, HiGitCommit, HiClock } from 'react-icons/hi'
+import { HiCode, HiClock } from 'react-icons/hi'
 import { formatDistanceToNow } from 'date-fns'
 
 const GithubActivity = () => {

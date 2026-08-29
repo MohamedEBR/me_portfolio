@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { HiStar, HiTerminal } from 'react-icons/hi'
+import { HiStar } from 'react-icons/hi'
 
 const TestimonialCard = ({ name, role, company, image, testimonial, rating, delay = 0 }) => (
   <motion.div

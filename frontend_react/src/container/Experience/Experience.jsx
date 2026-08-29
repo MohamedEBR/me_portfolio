@@ -128,6 +128,20 @@ const Experience = () => {
 
   const workExperience = [
     {
+      role: "Software Engineering Intern — IAM / Trust",
+      company: "Shopify",
+      period: "May 2026 - Present",
+      location: "Remote, Canada",
+      description: "Shipping production identity and access-management systems for credential lifecycle, device trust, PKI, workload identity, and authorization.",
+      achievements: [
+        "Shipped 49 merged pull requests across 10+ repositories in Ruby on Rails, Go, Terraform, and internal security infrastructure.",
+        "Built auditable short-lived credential flows with token lifecycle and revocation metadata while keeping credential material out of audit records.",
+        "Implemented hardware-backed credential storage and Linux TPM device identity, including certificate refresh and certificate/key verification.",
+        "Found and fixed two authorization vulnerabilities in the first week and authored a workload-identity design using mTLS and audience-bound short-lived tokens."
+      ],
+      technologies: ["Ruby on Rails", "Go", "Terraform", "PKI / X.509", "TPM", "mTLS", "OAuth", "GCP"]
+    },
+    {
       role: "Web Developer",
       company: "Panacea Karate Academy",
       period: "Jun 2024 - Present",
@@ -183,17 +197,17 @@ const Experience = () => {
 
   const educationData = [
     {
-      role: "Bachelor of Science in Computer Science",
+      role: "Honours Bachelor of Science",
       company: "University of Toronto",
-      period: "Expected Apr 2028",
+      period: "Expected 2028",
       location: "Toronto, ON",
-      description: "Specialist in Computer Science, Minor in Mathematics.",
+      description: "Information Security Specialist and Mathematics Major.",
       achievements: [
         "GPA: 3.75 / 4.0",
         "Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming, Software Design, Computer Organization",
         "Machine Learning, Probability I & II, Linear Regression Analysis, Linear Algebra II, Calculus III"
       ],
-      technologies: ["Data Structures", "Algorithms", "OOP", "Software Design", "Machine Learning", "Mathematics"],
+      technologies: ["Information Security", "Systems", "Algorithms", "Software Design", "Machine Learning", "Mathematics"],
       logo: images.uoftMain // Assuming this image exists from previous steps
     }
   ]

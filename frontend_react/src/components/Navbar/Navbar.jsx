@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { HiMenuAlt3, HiX, HiSun, HiMoon } from 'react-icons/hi'
+import { HiMenuAlt3, HiX } from 'react-icons/hi'
 import { useScrollPosition } from '../../hooks'
 import { cn, smoothScrollTo } from '../../utils'
 
@@ -8,14 +8,13 @@ const navItems = [
   { id: 'home', label: 'home' },
   { id: 'about', label: 'about' },
   { id: 'experience', label: 'experience' },
-  { id: 'clubs', label: 'clubs' },
-  { id: 'projects', label: 'exploits' },
+  { id: 'projects', label: 'projects' },
   { id: 'skills', label: 'skills' },
-  { id: 'testimonials', label: 'logs' },
+  { id: 'testimonials', label: 'feedback' },
   { id: 'contact', label: 'contact' }
 ]
 
-const Navbar = ({ isDarkMode, toggleDarkMode }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const scrollY = useScrollPosition()

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">SignalForge detection engineering platform</title>
+  <desc id="desc">Terminal-style event streams converging into a detection engine and incident timeline.</desc>
+  <rect width="1200" height="630" fill="#050505"/>
+  <g stroke="#163d21" stroke-width="1" opacity=".65">
+    <path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200"/>
+    <path d="M100 0v630M200 0v630M300 0v630M400 0v630M500 0v630M600 0v630M700 0v630M800 0v630M900 0v630M1000 0v630M1100 0v630"/>
+  </g>
+  <g fill="none" stroke="#00ff41" stroke-width="5">
+    <path d="M124 185h260l115 125h174l115-125h288"/>
+    <path d="M124 310h375M673 310h403" opacity=".65"/>
+    <path d="M124 435h260l115-125M673 310l115 125h288"/>
+    <rect x="499" y="220" width="174" height="180" fill="#07150a"/>
+    <path d="m539 310 41 41 60-84"/>
+  </g>
+  <g fill="#00ff41" font-family="monospace">
+    <text x="70" y="86" font-size="28">$ signalforge replay scenarios --explain</text>
+    <text x="78" y="172" font-size="23">CLOUD</text>
+    <text x="78" y="297" font-size="23">IDENTITY</text>
+    <text x="78" y="422" font-size="23">NETWORK</text>
+    <text x="890" y="172" font-size="23">FINDINGS</text>
+    <text x="890" y="297" font-size="23">INCIDENTS</text>
+    <text x="890" y="422" font-size="23">EVIDENCE</text>
+    <text x="435" y="586" font-size="28">DETECTION AS CODE // REPLAY</text>
+  </g>
+</svg>
