@@ -46,7 +46,7 @@ const projects = [
   },
   {
     id: 2,
-    title: "SentinelFlow",
+    title: "Network Intrusion Detection",
     category: "Security",
     description: "An end-to-end network intrusion-detection pipeline with Zeek/Argus ingestion, deployable feature contracts, explainable alerts, and hardened model artifacts.",
     image: networkSecurityImg,
